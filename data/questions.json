@@ -1,19 +1,130 @@
-[
+{
+"intro": "These questions help Kareer assess the best career pathways for you. Answer honestly so we can suggest the most suitable options for your future ♥️",
+
+"questions":[
+
+{
+"id":"education_level",
+"question":"What is your current education level?",
+"type":"single_select",
+"options":[
+"Class 8–10",
+"Class 11–12",
+"Diploma Student",
+"College Student",
+"Graduate"
+]
+},
+
 {
 "id":"subjects",
-"question":"Which subjects do you enjoy most?",
-"options":["Mathematics","Biology","Commerce","Arts","Computer Science"]
+"question":"Which subjects interest you the most?",
+"type":"multi_select",
+"options":[
+"Mathematics",
+"Biology",
+"Commerce",
+"Arts",
+"Computer Science",
+"Design"
+]
 },
 
 {
 "id":"work_type",
-"question":"What type of work excites you most?",
-"options":["Technical","Creative","Helping People","Business","Research"]
+"question":"What type of work excites you the most?",
+"type":"single_select",
+"options":[
+"Solving technical problems",
+"Helping people",
+"Running businesses",
+"Creating art or designs",
+"Research and discovery",
+"Leadership and management"
+]
+},
+
+{
+"id":"work_environment",
+"question":"What work environment do you prefer?",
+"type":"single_select",
+"options":[
+"Corporate office",
+"Outdoor or field work",
+"Creative studio",
+"Research laboratory",
+"Startup or entrepreneurial",
+"Government or public service"
+]
+},
+
+{
+"id":"team_style",
+"question":"How do you prefer to work?",
+"type":"single_select",
+"options":[
+"Independently",
+"In small teams",
+"In large organizations",
+"Leading teams",
+"Flexible freelance work"
+]
 },
 
 {
 "id":"risk",
-"question":"How comfortable are you with risk?",
-"options":["Low","Medium","High"]
-}
+"question":"How comfortable are you with career risk?",
+"type":"single_select",
+"options":[
+"Low risk – prefer stability",
+"Medium risk – balanced",
+"High risk – comfortable with uncertainty"
 ]
+},
+
+{
+"id":"education_commitment",
+"question":"How many years are you willing to study to reach your career?",
+"type":"single_select",
+"options":[
+"3–4 years",
+"5–6 years",
+"7–10 years",
+"As long as required"
+]
+},
+
+{
+"id":"motivation",
+"question":"What motivates you the most in a career?",
+"type":"single_select",
+"options":[
+"High salary",
+"Passion and creativity",
+"Helping society",
+"Leadership and influence",
+"Intellectual challenge"
+]
+},
+
+{
+"id":"lifestyle",
+"question":"What kind of lifestyle do you want from your career?",
+"type":"single_select",
+"options":[
+"Stable and predictable",
+"High income but stressful",
+"Creative and flexible",
+"Travel-oriented",
+"Prestigious or authoritative"
+]
+},
+
+{
+"id":"extra_info",
+"question":"Is there anything else you would like Kareer to know about your interests or goals?",
+"type":"text_input"
+}
+
+]
+}
