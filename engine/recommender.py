@@ -1,5 +1,6 @@
 from engine.loader import load_json
 from engine.scorer import score_career
+from engine.similarity import find_similar_careers
 
 CAREERS_FILE = "data/careers.json"
 RULES_FILE = "data/scoring_rules.json"
@@ -46,4 +47,16 @@ def recommend(user_answers, top_n=5):
 
     ranked = sorted(results, key=lambda x: x["score"], reverse=True)
 
-    return ranked[:top_n]
+    top_results = ranked[:top_n]
+
+    # Get similar careers based on the best match
+    if top_results:
+        best_career = top_results[0]["data"]
+        similar = find_similar_careers(best_career, careers)
+    else:
+        similar = []
+
+    return {
+        "matches": top_results,
+        "similar_careers": similar
+    }
