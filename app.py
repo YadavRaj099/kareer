@@ -1,12 +1,4 @@
-import streamlit as st
 
-from components.styles import load_styles
-
-from ui.home import show_home
-from ui.career_test import show_career_test
-from ui.results import show_results
-from ui.explorer import show_explorer
-from ui.insights import show_insights
 
 import streamlit as st
 from components.styles import load_styles
