@@ -1,1 +1,408 @@
-[]
+[
+{
+"name":"Software Engineer",
+"tags":["math","technology","programming","technical"],
+"risk":"medium",
+"demand":"high",
+"education_years":"4-6",
+"salary_range":"6L-30L",
+"path":[
+"10th → Choose Science stream",
+"11th–12th → Study PCM",
+"Clear JEE / other engineering entrance",
+"B.Tech Computer Science or IT",
+"Learn programming (Python/Java)",
+"Software Developer Job"
+]
+},
+
+{
+"name":"Data Scientist",
+"tags":["math","technology","analysis","research"],
+"risk":"medium",
+"demand":"high",
+"education_years":"4-6",
+"salary_range":"8L-40L",
+"path":[
+"10th → Science",
+"11th–12th → PCM",
+"B.Tech Computer Science / BSc Statistics",
+"Learn Python & Machine Learning",
+"Build Data Projects",
+"Data Scientist Job"
+]
+},
+
+{
+"name":"Civil Engineer",
+"tags":["math","engineering","technical"],
+"risk":"low",
+"demand":"high",
+"education_years":"4",
+"salary_range":"4L-15L",
+"path":[
+"10th → Science",
+"12th → PCM",
+"Clear Engineering Entrance",
+"B.Tech Civil Engineering",
+"Work in construction or infrastructure companies"
+]
+},
+
+{
+"name":"Mechanical Engineer",
+"tags":["math","engineering","technical"],
+"risk":"low",
+"demand":"medium",
+"education_years":"4",
+"salary_range":"4L-18L",
+"path":[
+"10th → Science",
+"12th → PCM",
+"Engineering Entrance Exam",
+"B.Tech Mechanical Engineering",
+"Manufacturing / Automotive Industry Job"
+]
+},
+
+{
+"name":"Doctor",
+"tags":["biology","medical","helping_people"],
+"risk":"low",
+"demand":"very_high",
+"education_years":"8+",
+"salary_range":"8L-50L",
+"path":[
+"10th → Science",
+"12th → PCB",
+"NEET Exam",
+"MBBS Degree",
+"Medical Internship",
+"Doctor / Specialist"
+]
+},
+
+{
+"name":"Pharmacist",
+"tags":["biology","medical","science"],
+"risk":"low",
+"demand":"high",
+"education_years":"4",
+"salary_range":"4L-12L",
+"path":[
+"10th → Science",
+"12th → PCB",
+"B.Pharm Degree",
+"Pharmacy Internship",
+"Work in pharmaceutical industry"
+]
+},
+
+{
+"name":"Chartered Accountant",
+"tags":["commerce","finance","analysis","business"],
+"risk":"medium",
+"demand":"high",
+"education_years":"5",
+"salary_range":"7L-30L",
+"path":[
+"10th → Commerce stream",
+"12th → Commerce",
+"CA Foundation",
+"CA Intermediate",
+"Articleship Training",
+"CA Final → Chartered Accountant"
+]
+},
+
+{
+"name":"Investment Banker",
+"tags":["finance","analysis","business"],
+"risk":"high",
+"demand":"high",
+"education_years":"5-7",
+"salary_range":"10L-50L",
+"path":[
+"10th → Commerce or Science",
+"12th → Commerce",
+"BBA / BCom / Economics",
+"MBA Finance",
+"Investment Banking Career"
+]
+},
+
+{
+"name":"Lawyer",
+"tags":["law","analysis","debate","research"],
+"risk":"medium",
+"demand":"high",
+"education_years":"5",
+"salary_range":"5L-40L",
+"path":[
+"10th → Any stream",
+"12th → Any stream",
+"CLAT Entrance Exam",
+"LLB Degree",
+"Legal Internship",
+"Advocate / Lawyer"
+]
+},
+
+{
+"name":"Teacher",
+"tags":["education","helping_people"],
+"risk":"low",
+"demand":"high",
+"education_years":"3-5",
+"salary_range":"3L-12L",
+"path":[
+"10th → Any stream",
+"12th → Choose subject of interest",
+"Bachelor Degree",
+"B.Ed Degree",
+"School Teacher"
+]
+},
+
+{
+"name":"Graphic Designer",
+"tags":["creative","design","arts"],
+"risk":"medium",
+"demand":"high",
+"education_years":"3-4",
+"salary_range":"4L-20L",
+"path":[
+"10th → Any stream",
+"12th → Arts / Any",
+"B.Des / Design Course",
+"Learn Photoshop & Illustrator",
+"Graphic Designer Job"
+]
+},
+
+{
+"name":"Architect",
+"tags":["design","engineering","creative"],
+"risk":"medium",
+"demand":"high",
+"education_years":"5",
+"salary_range":"5L-25L",
+"path":[
+"10th → Science",
+"12th → PCM",
+"NATA Entrance Exam",
+"B.Arch Degree",
+"Architect Job"
+]
+},
+
+{
+"name":"Pilot",
+"tags":["technology","travel","technical"],
+"risk":"high",
+"demand":"medium",
+"education_years":"3-5",
+"salary_range":"20L-80L",
+"path":[
+"10th → Science",
+"12th → PCM",
+"Commercial Pilot License Training",
+"Flight Hours Training",
+"Airline Pilot"
+]
+},
+
+{
+"name":"Entrepreneur",
+"tags":["business","leadership","risk"],
+"risk":"high",
+"demand":"high",
+"education_years":"variable",
+"salary_range":"unlimited",
+"path":[
+"10th → Any stream",
+"12th → Any",
+"Business Idea Development",
+"Startup Launch",
+"Build and scale business"
+]
+},
+
+{
+"name":"Game Developer",
+"tags":["technology","programming","creative"],
+"risk":"medium",
+"demand":"high",
+"education_years":"4",
+"salary_range":"6L-30L",
+"path":[
+"10th → Science",
+"12th → PCM",
+"B.Tech Computer Science",
+"Learn Game Engines (Unity/Unreal)",
+"Game Developer Job"
+]
+},
+
+{
+"name":"Cybersecurity Analyst",
+"tags":["technology","security","analysis"],
+"risk":"medium",
+"demand":"very_high",
+"education_years":"4",
+"salary_range":"8L-35L",
+"path":[
+"10th → Science",
+"12th → PCM",
+"B.Tech Computer Science",
+"Learn Ethical Hacking",
+"Cybersecurity Analyst Job"
+]
+},
+
+{
+"name":"Journalist",
+"tags":["writing","media","creative"],
+"risk":"medium",
+"demand":"medium",
+"education_years":"3",
+"salary_range":"3L-15L",
+"path":[
+"10th → Any stream",
+"12th → Arts / Any",
+"Bachelor in Journalism",
+"Media Internship",
+"Journalist Career"
+]
+},
+
+{
+"name":"Psychologist",
+"tags":["research","helping_people","analysis"],
+"risk":"low",
+"demand":"high",
+"education_years":"5",
+"salary_range":"4L-20L",
+"path":[
+"10th → Any stream",
+"12th → Psychology / Arts",
+"Bachelor in Psychology",
+"Masters in Psychology",
+"Psychologist Career"
+]
+},
+
+{
+"name":"UI UX Designer",
+"tags":["design","technology","creative"],
+"risk":"medium",
+"demand":"very_high",
+"education_years":"3-4",
+"salary_range":"6L-35L",
+"path":[
+"10th → Any stream",
+"12th → Any",
+"Design / UI UX Course",
+"Build Design Portfolio",
+"UI UX Designer Job"
+]
+},
+
+{
+"name":"Digital Marketer",
+"tags":["marketing","business","creative"],
+"risk":"medium",
+"demand":"very_high",
+"education_years":"3",
+"salary_range":"5L-25L",
+"path":[
+"10th → Any stream",
+"12th → Any",
+"Marketing / Digital Marketing Course",
+"Learn SEO and Ads",
+"Digital Marketing Career"
+]
+},
+
+{
+"name":"Research Scientist",
+"tags":["research","science","analysis"],
+"risk":"low",
+"demand":"high",
+"education_years":"8+",
+"salary_range":"6L-30L",
+"path":[
+"10th → Science",
+"12th → PCM/PCB",
+"BSc Degree",
+"MSc Degree",
+"PhD Research",
+"Scientist Career"
+]
+},
+
+{
+"name":"Hotel Manager",
+"tags":["hospitality","management","business"],
+"risk":"low",
+"demand":"medium",
+"education_years":"3-4",
+"salary_range":"4L-20L",
+"path":[
+"10th → Any stream",
+"12th → Any",
+"Hotel Management Degree",
+"Hospitality Internship",
+"Hotel Manager"
+]
+},
+
+{
+"name":"Fashion Designer",
+"tags":["creative","design","arts"],
+"risk":"medium",
+"demand":"high",
+"education_years":"3-4",
+"salary_range":"4L-25L",
+"path":[
+"10th → Any stream",
+"12th → Arts",
+"Fashion Design Degree",
+"Build Portfolio",
+"Fashion Designer Career"
+]
+},
+
+{
+"name":"IAS Officer",
+"tags":["government","leadership","analysis"],
+"risk":"medium",
+"demand":"very_high",
+"education_years":"5+",
+"salary_range":"10L+",
+"path":[
+"10th → Any stream",
+"12th → Any",
+"Bachelor Degree",
+"Prepare for UPSC",
+"Clear UPSC Exam",
+"IAS Officer"
+]
+},
+
+{
+"name":"Army Officer",
+"tags":["defense","leadership","physical"],
+"risk":"high",
+"demand":"high",
+"education_years":"3-4",
+"salary_range":"8L+",
+"path":[
+"10th → Any stream",
+"12th → Science / Any",
+"NDA or CDS Exam",
+"Military Training",
+"Army Officer"
+]
+}
+]
