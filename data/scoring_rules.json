@@ -1,5 +1,46 @@
 {
-"subjects_match":3,
-"work_type_match":2,
-"risk_match":1
+  "weights": {
+    "stream": 3,
+    "work_style": 3,
+    "risk": 2,
+    "skills": 4
+  },
+
+  "classification": {
+    "perfect": 9,
+    "strong": 7,
+    "alternative": 5,
+    "weak": 3
+  },
+
+  "matching": {
+
+    "stream": {
+      "science": ["AI Engineer","Data Scientist","Cybersecurity Specialist","Robotics Engineer","Doctor","Pharmacist"],
+      "commerce": ["Investment Banker","Financial Analyst","Accountant","Business Analyst","Entrepreneur"],
+      "arts": ["Psychologist","UI UX Designer","Journalist","Content Strategist","Teacher"]
+    },
+
+    "work_style": {
+      "analytical": ["AI Engineer","Data Scientist","Financial Analyst","Cybersecurity Specialist","Business Analyst"],
+      "creative": ["UI UX Designer","Content Strategist","Journalist","Game Designer"],
+      "helping people": ["Doctor","Teacher","Psychologist","Nurse"]
+    },
+
+    "risk": {
+      "low": ["Doctor","Accountant","Teacher","Pharmacist"],
+      "medium": ["Data Scientist","Business Analyst","Psychologist","UI UX Designer"],
+      "high": ["Entrepreneur","Investment Banker","Startup Founder"]
+    },
+
+    "skills": {
+      "math": ["Data Scientist","AI Engineer","Financial Analyst","Actuary"],
+      "programming": ["AI Engineer","Software Engineer","Cybersecurity Specialist","Game Developer"],
+      "design": ["UI UX Designer","Product Designer","Game Designer"],
+      "communication": ["Journalist","Content Strategist","Teacher","Psychologist"],
+      "biology": ["Doctor","Pharmacist","Biotech Researcher"],
+      "business": ["Entrepreneur","Investment Banker","Business Analyst","Consultant"]
+    }
+
+  }
 }
