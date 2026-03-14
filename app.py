@@ -107,39 +107,7 @@ st.markdown("""
     margin-right: 8px;
     margin-top: 4px;
 
-.ticker-container{
-    margin-top:10px;
-    margin-bottom:30px;
-    border:1px solid rgba(59,130,246,0.2);
-    border-radius:12px;
-    overflow:hidden;
-    background:rgba(15,23,42,0.85);
-}
 
-.ticker-wrap{
-    width:100%;
-    overflow:hidden;
-    white-space:nowrap;
-}
-
-.ticker-move{
-    display:inline-block;
-    padding-left:100%;
-    animation:ticker 28s linear infinite;
-    color:#93c5fd;
-    font-size:14px;
-    font-weight:600;
-}
-
-.ticker-item{
-    display:inline-block;
-    margin-right:70px;
-}
-
-@keyframes ticker{
-    0%{transform:translateX(0);}
-    100%{transform:translateX(-100%);}
-}
 
 }
 </style>
@@ -191,6 +159,41 @@ trend_html = "".join([f"<div class='trend-item'>🔥 {t}</div>" for t in trends]
 
 st.markdown(f"""
 <style>
+
+.ticker-container{
+    margin-top:10px;
+    margin-bottom:30px;
+    border:1px solid rgba(59,130,246,0.2);
+    border-radius:12px;
+    overflow:hidden;
+    background:rgba(15,23,42,0.85);
+}
+
+.ticker-wrap{
+    width:100%;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.ticker-move{
+    display:inline-block;
+    padding-left:100%;
+    animation:ticker 28s linear infinite;
+    color:#93c5fd;
+    font-size:14px;
+    font-weight:600;
+}
+
+.ticker-item{
+    display:inline-block;
+    margin-right:70px;
+}
+
+@keyframes ticker{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-100%);}
+}
+
 
 """, unsafe_allow_html=True)
 
