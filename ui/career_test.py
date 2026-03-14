@@ -1,5 +1,5 @@
 import streamlit as st
-from engine.recommender import recommend_careers
+from engine.recommender import recommend
 
 def show_career_test():
 
@@ -69,7 +69,7 @@ def show_career_test():
             "skills": [s.lower() for s in skills]
         }
 
-        results = recommend_careers(user_answers)
+        results = recommend(user_answers)
 
         st.session_state.results = results
         st.session_state.page = "results"
