@@ -7,6 +7,10 @@ def show_career_test():
 
     questions = list(get_questions().items())
 
+    # -----------------------------
+    # SESSION STATE
+    # -----------------------------
+
     if "step" not in st.session_state:
         st.session_state.step = 0
 
@@ -18,71 +22,71 @@ def show_career_test():
 
     st.title("Career Path Finder")
 
+    # -----------------------------
+    # STEP INDICATOR
+    # -----------------------------
+
+    st.caption(f"Step {step + 1} of {total}")
+
+    # -----------------------------
+    # PROGRESS BAR + ROCKET
+    # -----------------------------
+
     progress = (step + 1) / total
     runner_position = int(progress * 100)
 
-    # ----------------------------
-    # RUNNER PROGRESS BAR
-    # ----------------------------
-
     st.markdown(
         f"""
-        <div style="
-            width:100%;
-            background:#1e293b;
-            border-radius:10px;
-            height:22px;
-            position:relative;
-            margin-bottom:20px;
-        ">
-            <div style="
-                width:{runner_position}%;
-                background:#3b82f6;
-                height:100%;
-                border-radius:10px;
-                transition:width 0.4s ease;
-            "></div>
+<div style="width:100%;background:#1e293b;border-radius:12px;height:24px;position:relative;margin-bottom:30px;">
 
-            <div style="
-                position:absolute;
-                left:{runner_position}%;
-                transform:translateX(-50%);
-                top:-12px;
-                font-size:22px;
-            ">🚀</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
+<div style="width:{runner_position}%;background:#3b82f6;height:100%;border-radius:12px;transition:width .4s ease;"></div>
+
+<div style="position:absolute;left:{runner_position}%;transform:translateX(-50%);top:-14px;font-size:24px;">
+🚀
+</div>
+
+</div>
+""",
+        unsafe_allow_html=True
     )
 
-    # ----------------------------
+    # -----------------------------
     # CURRENT QUESTION
-    # ----------------------------
+    # -----------------------------
 
     key, q = questions[step]
 
     st.subheader(q["question"])
+    st.write("")
 
-    answer = None
-
-    # ----------------------------
-    # CARD STYLE OPTIONS
-    # ----------------------------
+    # -----------------------------
+    # CARD STYLE SINGLE SELECT
+    # -----------------------------
 
     if q["type"] == "single":
+
+        selected = st.session_state.answers.get(key)
 
         cols = st.columns(len(q["options"]))
 
         for i, option in enumerate(q["options"]):
 
+            is_selected = selected == option
+
+            label = option
+            if is_selected:
+                label = f"✅ {option}"
+
             with cols[i]:
 
-                if st.button(option, key=f"{key}_{i}"):
+                if st.button(label, use_container_width=True, key=f"{key}_{i}"):
 
                     st.session_state.answers[key] = option
                     st.rerun()
 
-        answer = st.session_state.answers.get(key)
+    # -----------------------------
+    # MULTI SELECT
+    # -----------------------------
 
     elif q["type"] == "multi":
 
@@ -94,25 +98,27 @@ def show_career_test():
 
         st.session_state.answers[key] = answer
 
-    # ----------------------------
-    # OPTIONAL AI TEXTBOX
-    # ----------------------------
+    # -----------------------------
+    # OPTIONAL AI TEXT INPUT
+    # -----------------------------
 
-    st.markdown("#### Tell Kareer more about yourself (optional)")
+    st.write("")
+    st.markdown("##### Tell Kareer more about yourself (optional)")
 
     notes = st.text_area(
         "",
-        placeholder="Example: I like startups, technology, building products, helping people, etc.",
+        placeholder="Example: I enjoy building things, solving problems, startups, technology, etc.",
         key=f"notes_{key}"
     )
 
     st.session_state.answers[f"{key}_notes"] = notes
 
+    st.write("")
     st.divider()
 
-    # ----------------------------
+    # -----------------------------
     # NAVIGATION BUTTONS
-    # ----------------------------
+    # -----------------------------
 
     col1, col2, col3 = st.columns([1,2,1])
 
@@ -143,11 +149,9 @@ def show_career_test():
                 for k, v in st.session_state.answers.items():
 
                     if isinstance(v, list):
-
                         user_answers[k] = [str(x).lower() for x in v]
 
                     else:
-
                         user_answers[k] = str(v).lower()
 
                 results = recommend(user_answers)
