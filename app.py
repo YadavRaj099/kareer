@@ -151,7 +151,6 @@ st.markdown("""
     border-radius:12px;
 }
 
-
 </style>
 """, unsafe_allow_html=True)
 
