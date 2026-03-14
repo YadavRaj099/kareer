@@ -1,5 +1,5 @@
 
-
+from engine.trends import get_random_trend
 import streamlit as st
 from components.styles import load_styles
 from ui.career_test import show_career_test
