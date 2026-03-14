@@ -30,6 +30,7 @@ if "page" not in st.session_state:
 
 def go(page_name: str):
     st.session_state.page = page_name
+    st.rerun()
 
 
 # =====================================================
@@ -130,11 +131,10 @@ st.markdown("""
     margin-top:12px;
     margin-bottom:30px;
     border:1px solid rgba(59,130,246,.35);
-    box-shadow:0 0 10px        rgba(59,130,246,.15);
     border-radius:14px;
     overflow:hidden;
     background:linear-gradient(180deg,#0f172a,#020617);
-    box-shadow:0 8px 24px rgba(0,0,0,.35);
+    box-shadow:0 8px 24px rgba(0,0,0,.35), 0 0 10px rgba(59,130,246,.15);
 }
 
 .ticker-wrap{
@@ -174,7 +174,7 @@ st.markdown("""
 # 6️⃣ NAVBAR
 # =====================================================
 
-nav1, nav2, nav3, nav4 = st.columns([5,1,1,1])
+nav1, nav2, nav3, nav4, nav5 = st.columns([5,1,1,1,1])
 
 with nav1:
     st.markdown('<div class="brand-title">Kareer</div>', unsafe_allow_html=True)
@@ -191,6 +191,13 @@ with nav4:
     if st.button("Insights", use_container_width=True):
         go("insights")
 
+with nav5:
+    if st.button("Explorer", use_container_width=True):
+        go("explorer")
+
+
+st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
+
 
 # =====================================================
 # 7️⃣ TREND TICKER
@@ -206,6 +213,8 @@ for t in trends:
 ticker_html += '</div></div></div>'
 
 st.markdown(ticker_html, unsafe_allow_html=True)
+
+st.markdown("---")
 
 
 # =====================================================
