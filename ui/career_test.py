@@ -3,75 +3,134 @@ from engine.recommender import recommend
 
 def show_career_test():
 
-    st.title("Career Path Finder")
+st.title("Career Path Finder")
 
-    st.write(
-        "Answer a few questions so Kareer can determine the best career pathways for you."
-    )
+st.write(
+    "Answer a few questions so Kareer can determine the best career pathways for you."
+)
 
-    st.divider()
+st.divider()
 
-    # =========================
-    # STREAM
-    # =========================
+# =========================
+# STREAM
+# =========================
 
-    stream = st.selectbox(
-        "Which academic stream interests you the most?",
-        ["Science", "Commerce", "Arts"]
-    )
+stream = st.selectbox(
+    "Which academic stream interests you the most?",
+    ["Science", "Commerce", "Arts"]
+)
 
-    # =========================
-    # WORK STYLE
-    # =========================
+# =========================
+# INTEREST AREAS
+# =========================
 
-    work_style = st.selectbox(
-        "What type of work do you enjoy?",
-        ["Analytical", "Creative", "Helping People"]
-    )
+interests = st.multiselect(
+    "Which areas interest you the most?",
+    [
+        "Technology",
+        "Finance",
+        "Medicine",
+        "Design",
+        "Psychology",
+        "Business",
+        "Research",
+        "Education"
+    ]
+)
 
-    # =========================
-    # RISK
-    # =========================
+# =========================
+# WORK STYLE
+# =========================
 
-    risk = st.selectbox(
-        "What is your risk tolerance?",
-        ["Low", "Medium", "High"]
-    )
+work_style = st.selectbox(
+    "What type of work do you enjoy?",
+    [
+        "Analytical",
+        "Creative",
+        "Helping People",
+        "Managing Teams",
+        "Building Products"
+    ]
+)
 
-    # =========================
-    # SKILLS
-    # =========================
+# =========================
+# RISK TOLERANCE
+# =========================
 
-    skills = st.multiselect(
-        "Which skills interest you?",
-        [
-            "Math",
-            "Programming",
-            "Design",
-            "Communication",
-            "Biology",
-            "Business"
-        ]
-    )
+risk = st.selectbox(
+    "What is your risk tolerance?",
+    ["Low", "Medium", "High"]
+)
 
-    st.divider()
+# =========================
+# SKILLS
+# =========================
 
-    # =========================
-    # SUBMIT
-    # =========================
+skills = st.multiselect(
+    "Which skills interest you?",
+    [
+        "Math",
+        "Programming",
+        "Design",
+        "Communication",
+        "Biology",
+        "Business",
+        "Writing",
+        "Problem Solving"
+    ]
+)
 
-    if st.button("Find My Career Path", use_container_width=True):
+# =========================
+# WORK ENVIRONMENT
+# =========================
 
-        user_answers = {
-            "stream": stream.lower(),
-            "work_style": work_style.lower(),
-            "risk": risk.lower(),
-            "skills": [s.lower() for s in skills]
-        }
+environment = st.selectbox(
+    "What type of work environment do you prefer?",
+    [
+        "Office",
+        "Remote",
+        "Laboratory",
+        "Outdoor",
+        "Flexible"
+    ]
+)
 
-        results = recommend(user_answers)
+# =========================
+# CAREER PRIORITY
+# =========================
 
-        st.session_state.results = results
-        st.session_state.page = "results"
+priority = st.selectbox(
+    "What matters most to you in a career?",
+    [
+        "High Salary",
+        "Work Life Balance",
+        "Impact on Society",
+        "Creativity",
+        "Leadership"
+    ]
+)
 
-        st.rerun()
+st.divider()
+
+# =========================
+# SUBMIT
+# =========================
+
+if st.button("Find My Career Path", use_container_width=True):
+
+    user_answers = {
+        "stream": stream.lower(),
+        "work_style": work_style.lower(),
+        "risk": risk.lower(),
+        "skills": [s.lower() for s in skills],
+        "interests": [i.lower() for i in interests],
+        "environment": environment.lower(),
+        "priority": priority.lower()
+    }
+
+    results = recommend(user_answers)
+
+    st.session_state.results = results
+    st.session_state.page = "results"
+
+    st.rerun()
