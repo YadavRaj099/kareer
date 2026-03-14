@@ -8,18 +8,18 @@ RULES_FILE = "data/scoring_rules.json"
 
 def classify(score, rules):
 
-    thresholds = rules["classification"]
+    thresholds = rules.get("classification", {})
 
-    if score >= thresholds["perfect"]:
+    if score >= thresholds.get("perfect", 10):
         return "Perfect Match"
 
-    elif score >= thresholds["strong"]:
+    elif score >= thresholds.get("strong", 8):
         return "Strong Match"
 
-    elif score >= thresholds["alternative"]:
+    elif score >= thresholds.get("alternative", 6):
         return "Alternative"
 
-    elif score >= thresholds["weak"]:
+    elif score >= thresholds.get("weak", 4):
         return "Weak Match"
 
     return "Not Recommended"
@@ -30,16 +30,22 @@ def recommend(user_answers, top_n=5):
     careers = load_json(CAREERS_FILE)
     rules = load_json(RULES_FILE)
 
+    if not isinstance(careers, list):
+        careers = []
+
     results = []
 
     for career in careers:
+
+        if not isinstance(career, dict):
+            continue
 
         score = score_career(career, user_answers, rules)
 
         classification = classify(score, rules)
 
         results.append({
-            "career": career.get("name"),
+            "career": career.get("name", "Unknown Career"),
             "score": score,
             "classification": classification,
             "data": career
@@ -49,7 +55,6 @@ def recommend(user_answers, top_n=5):
 
     top_results = ranked[:top_n]
 
-    # Get similar careers based on the best match
     if top_results:
         best_career = top_results[0]["data"]
         similar = find_similar_careers(best_career, careers)
