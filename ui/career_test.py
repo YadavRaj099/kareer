@@ -1,4 +1,5 @@
 import streamlit as st
+from engine.questions import get_questions
 from engine.recommender import recommend
 
 def show_career_test():
