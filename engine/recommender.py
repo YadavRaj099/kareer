@@ -6,6 +6,10 @@ CAREERS_FILE = "data/careers.json"
 RULES_FILE = "data/scoring_rules.json"
 
 
+# -----------------------------------
+# CLASSIFY MATCH STRENGTH
+# -----------------------------------
+
 def classify(score, rules):
 
     thresholds = rules.get("classification", {})
@@ -19,11 +23,15 @@ def classify(score, rules):
     elif score >= thresholds.get("alternative", 6):
         return "Alternative"
 
-    elif score >= thresholds.get("weak", 4):
+    elif score >= thresholds.get("weak", 3):
         return "Weak Match"
 
-    return "Not Recommended"
+    return "Exploratory Match"
 
+
+# -----------------------------------
+# MAIN RECOMMENDATION ENGINE
+# -----------------------------------
 
 def recommend(user_answers, top_n=5):
 
@@ -33,7 +41,14 @@ def recommend(user_answers, top_n=5):
     if not isinstance(careers, list):
         careers = []
 
+    if not isinstance(user_answers, dict):
+        user_answers = {}
+
     results = []
+
+    # ----------------------------
+    # SCORE ALL CAREERS
+    # ----------------------------
 
     for career in careers:
 
@@ -51,15 +66,41 @@ def recommend(user_answers, top_n=5):
             "data": career
         })
 
+    # ----------------------------
+    # SORT CAREERS BY SCORE
+    # ----------------------------
+
     ranked = sorted(results, key=lambda x: x["score"], reverse=True)
+
+    # ----------------------------
+    # ENSURE RESULTS ALWAYS EXIST
+    # ----------------------------
+
+    if not ranked:
+        return {
+            "matches": [],
+            "similar_careers": []
+        }
 
     top_results = ranked[:top_n]
 
-    if top_results:
-        best_career = top_results[0]["data"]
+    # ----------------------------
+    # FIND SIMILAR CAREERS
+    # ----------------------------
+
+    best_career = top_results[0].get("data", {})
+
+    try:
         similar = find_similar_careers(best_career, careers)
-    else:
+    except Exception:
         similar = []
+
+    # ----------------------------
+    # SAFETY FALLBACK
+    # ----------------------------
+
+    if not top_results:
+        top_results = ranked[:3]
 
     return {
         "matches": top_results,
