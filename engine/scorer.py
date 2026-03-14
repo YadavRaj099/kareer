@@ -7,6 +7,10 @@ def score_career(career, user_answers, rules):
 
     score = 0
 
+    # -----------------------------
+    # SAFE TAG EXTRACTION
+    # -----------------------------
+
     tags = career.get("tags", [])
 
     if not isinstance(tags, list):
@@ -14,34 +18,107 @@ def score_career(career, user_answers, rules):
 
     career_tags = [str(t).lower() for t in tags]
 
-    stream = user_answers.get("stream")
-    if stream and stream in career_tags:
-        score += weights.get("stream", 2)
+    # -----------------------------
+    # HELPER FUNCTION
+    # -----------------------------
 
-    work_style = user_answers.get("work_style")
-    if work_style and work_style in career_tags:
-        score += weights.get("work_style", 2)
+    def match(value, weight):
 
-    risk = user_answers.get("risk")
-    if risk and risk in career_tags:
-        score += weights.get("risk", 1)
+        nonlocal score
+
+        if not value:
+            return
+
+        value = str(value).lower()
+
+        # exact match
+        if value in career_tags:
+            score += weight
+            return
+
+        # partial match
+        for tag in career_tags:
+            if value in tag or tag in value:
+                score += weight * 0.6
+                return
+
+    # -----------------------------
+    # STREAM
+    # -----------------------------
+
+    match(user_answers.get("stream"), weights.get("stream", 3))
+
+    # -----------------------------
+    # WORK STYLE
+    # -----------------------------
+
+    match(user_answers.get("work_style"), weights.get("work_style", 3))
+
+    # -----------------------------
+    # RISK
+    # -----------------------------
+
+    match(user_answers.get("risk"), weights.get("risk", 2))
+
+    # -----------------------------
+    # ENVIRONMENT
+    # -----------------------------
+
+    match(user_answers.get("environment"), weights.get("environment", 2))
+
+    # -----------------------------
+    # PRIORITY
+    # -----------------------------
+
+    match(user_answers.get("priority"), weights.get("priority", 2))
+
+    # -----------------------------
+    # SKILLS
+    # -----------------------------
 
     skills = user_answers.get("skills", [])
-    for skill in skills:
-        if skill in career_tags:
-            score += weights.get("skills", 2)
+
+    if isinstance(skills, list):
+
+        for skill in skills:
+
+            skill = str(skill).lower()
+
+            if skill in career_tags:
+                score += weights.get("skills", 3)
+
+            else:
+                for tag in career_tags:
+                    if skill in tag or tag in skill:
+                        score += weights.get("skills", 3) * 0.5
+                        break
+
+    # -----------------------------
+    # INTERESTS
+    # -----------------------------
 
     interests = user_answers.get("interests", [])
-    for interest in interests:
-        if interest in career_tags:
-            score += weights.get("interests", 2)
 
-    environment = user_answers.get("environment")
-    if environment and environment in career_tags:
-        score += weights.get("environment", 1)
+    if isinstance(interests, list):
 
-    priority = user_answers.get("priority")
-    if priority and priority in career_tags:
-        score += weights.get("priority", 1)
+        for interest in interests:
 
-    return score
+            interest = str(interest).lower()
+
+            if interest in career_tags:
+                score += weights.get("interests", 3)
+
+            else:
+                for tag in career_tags:
+                    if interest in tag or tag in interest:
+                        score += weights.get("interests", 3) * 0.5
+                        break
+
+    # -----------------------------
+    # FINAL SCORE SAFETY
+    # -----------------------------
+
+    if score == 0:
+        score = 1
+
+    return round(score, 2)
