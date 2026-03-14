@@ -1,6 +1,7 @@
 import streamlit as st
-from engine.questions import get_questions
 from engine.recommender import recommend
+from engine.questions import get_questions
+
 
 def show_career_test():
 
@@ -12,106 +13,38 @@ def show_career_test():
 
     st.divider()
 
-    # -------------------------
-    # STREAM
-    # -------------------------
+    questions = get_questions()
 
-    stream = st.selectbox(
-        "Which academic stream interests you the most?",
-        ["Science", "Commerce", "Arts"]
-    )
+    answers = {}
 
-    # -------------------------
-    # INTEREST AREAS
-    # -------------------------
+    for key, q in questions.items():
 
-    interests = st.multiselect(
-        "Which areas interest you?",
-        [
-            "Technology",
-            "Finance",
-            "Medicine",
-            "Design",
-            "Psychology",
-            "Business",
-            "Research",
-            "Education"
-        ]
-    )
+        if q["type"] == "single":
 
-    # -------------------------
-    # WORK STYLE
-    # -------------------------
+            answers[key] = st.selectbox(
+                q["question"],
+                q["options"]
+            )
 
-    work_style = st.selectbox(
-        "What type of work do you enjoy?",
-        [
-            "Analytical",
-            "Creative",
-            "Helping People",
-            "Managing Teams",
-            "Building Products"
-        ]
-    )
+        elif q["type"] == "multi":
 
-    # -------------------------
-    # RISK TOLERANCE
-    # -------------------------
-
-    risk = st.selectbox(
-        "What is your risk tolerance?",
-        ["Low", "Medium", "High"]
-    )
-
-    # -------------------------
-    # SKILLS
-    # -------------------------
-
-    skills = st.multiselect(
-        "Which skills interest you?",
-        [
-            "Math",
-            "Programming",
-            "Design",
-            "Communication",
-            "Biology",
-            "Business",
-            "Writing",
-            "Problem Solving"
-        ]
-    )
-
-    # -------------------------
-    # WORK ENVIRONMENT
-    # -------------------------
-
-    environment = st.selectbox(
-        "What work environment do you prefer?",
-        [
-            "Office",
-            "Remote",
-            "Laboratory",
-            "Outdoor",
-            "Flexible"
-        ]
-    )
+            answers[key] = st.multiselect(
+                q["question"],
+                q["options"]
+            )
 
     st.divider()
 
-    # -------------------------
-    # SUBMIT BUTTON
-    # -------------------------
-
     if st.button("Find My Career Path", use_container_width=True):
 
-        user_answers = {
-            "stream": stream.lower(),
-            "interests": [i.lower() for i in interests],
-            "work_style": work_style.lower(),
-            "risk": risk.lower(),
-            "skills": [s.lower() for s in skills],
-            "environment": environment.lower()
-        }
+        user_answers = {}
+
+        for k, v in answers.items():
+
+            if isinstance(v, list):
+                user_answers[k] = [str(x).lower() for x in v]
+            else:
+                user_answers[k] = str(v).lower()
 
         results = recommend(user_answers)
 
