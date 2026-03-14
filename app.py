@@ -161,39 +161,50 @@ st.markdown(f"""
 <style>
 
 .ticker-container{
-    margin-top:10px;
-    margin-bottom:30px;
-    border:1px solid rgba(59,130,246,0.2);
-    border-radius:12px;
+    margin-top:14px;
+    margin-bottom:34px;
+    border:1px solid rgba(59,130,246,0.25);
+    border-radius:14px;
     overflow:hidden;
-    background:rgba(15,23,42,0.85);
+    background:linear-gradient(180deg,#0f172a,#020617);
+    box-shadow:0 8px 24px rgba(0,0,0,0.35);
 }
 
 .ticker-wrap{
     width:100%;
     overflow:hidden;
     white-space:nowrap;
+    position:relative;
 }
 
 .ticker-move{
     display:inline-block;
     padding-left:100%;
-    animation:ticker 28s linear infinite;
+    animation:tickerScroll 40s linear infinite;
     color:#93c5fd;
     font-size:14px;
     font-weight:600;
+    letter-spacing:0.2px;
+}
+
+.ticker-container:hover .ticker-move{
+    animation-play-state:paused;
 }
 
 .ticker-item{
     display:inline-block;
-    margin-right:70px;
+    margin-right:80px;
+    opacity:0.95;
 }
 
-@keyframes ticker{
-    0%{transform:translateX(0);}
-    100%{transform:translateX(-100%);}
+.ticker-item:hover{
+    opacity:1;
 }
 
+@keyframes tickerScroll{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-100%); }
+}
 
 """, unsafe_allow_html=True)
 
