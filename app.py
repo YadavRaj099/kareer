@@ -192,57 +192,6 @@ trend_html = "".join([f"<div class='trend-item'>🔥 {t}</div>" for t in trends]
 st.markdown(f"""
 <style>
 
-.trend-container {{
-    width:100%;
-    overflow:hidden;
-    border:2px solid #3b82f6;
-    border-radius:14px;
-    background:#020617;
-    padding:10px;
-    margin-top:20px;
-    margin-bottom:30px;
-}}
-
-.trend-slider {{
-    display:flex;
-    animation: slide 24s linear infinite;
-}}
-
-.trend-item {{
-    min-width:100%;
-    text-align:center;
-    font-size:16px;
-    color:#e5e7eb;
-    font-weight:500;
-}}
-
-@keyframes slide {{
-    0% {{ transform:translateX(0%); }}
-    16% {{ transform:translateX(0%); }}
-
-    20% {{ transform:translateX(-100%); }}
-    36% {{ transform:translateX(-100%); }}
-
-    40% {{ transform:translateX(-200%); }}
-    56% {{ transform:translateX(-200%); }}
-
-    60% {{ transform:translateX(-300%); }}
-    76% {{ transform:translateX(-300%); }}
-
-    80% {{ transform:translateX(-400%); }}
-    96% {{ transform:translateX(-400%); }}
-
-    100% {{ transform:translateX(0%); }}
-}}
-
-</style>
-
-<div class="trend-container">
-<div class="trend-slider">
-{trend_html}
-</div>
-</div>
-
 """, unsafe_allow_html=True)
 
 
