@@ -1,38 +1,24 @@
-def calculate_similarity(career_a, career_b):
+def find_similar_careers(target, careers, limit=3):
 
-    tags_a = set([t.lower() for t in career_a.get("tags", [])])
-    tags_b = set([t.lower() for t in career_b.get("tags", [])])
+target_tags = set(target.get("tags", []))
 
-    if not tags_a or not tags_b:
-        return 0
+similar = []
 
-    shared_tags = tags_a.intersection(tags_b)
-    total_tags = tags_a.union(tags_b)
+for career in careers:
 
-    similarity_score = len(shared_tags) / len(total_tags)
+    if not isinstance(career, dict):
+        continue
 
-    return similarity_score
+    if career.get("name") == target.get("name"):
+        continue
 
+    tags = set(career.get("tags", []))
 
-def find_similar_careers(target_career, careers, threshold=0.4, max_results=5):
+    overlap = len(target_tags & tags)
 
-    similar = []
+    if overlap > 0:
+        similar.append((career.get("name"), overlap))
 
-    for career in careers:
+similar_sorted = sorted(similar, key=lambda x: x[1], reverse=True)
 
-        if career["name"] == target_career["name"]:
-            continue
-
-        similarity = calculate_similarity(target_career, career)
-
-        if similarity >= threshold:
-
-            similar.append({
-                "career": career["name"],
-                "similarity": round(similarity,2),
-                "data": career
-            })
-
-    similar_sorted = sorted(similar, key=lambda x: x["similarity"], reverse=True)
-
-    return similar_sorted[:max_results]
+return [name for name, _ in similar_sorted[:limit]]
