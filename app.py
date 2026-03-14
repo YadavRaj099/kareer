@@ -116,41 +116,6 @@ st.markdown("""
     margin-top:4px;
 }
 
-/* CAREER TEST CONTAINER */
-
-.career-test-card{
-    background: linear-gradient(180deg,#0f172a,#020617);
-    border:1px solid rgba(59,130,246,0.25);
-    border-radius:18px;
-    padding:30px;
-    margin-top:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.35);
-}
-
-/* QUESTION TITLE */
-
-.question-label{
-    font-size:14px;
-    font-weight:600;
-    color:#cbd5e1;
-    margin-bottom:6px;
-}
-
-/* FORM SPACING */
-
-.form-section{
-    margin-bottom:20px;
-}
-
-/* SUBMIT BUTTON */
-
-.stButton > button{
-    height:52px;
-    font-size:16px;
-    font-weight:600;
-    border-radius:12px;
-}
-
 </style>
 """, unsafe_allow_html=True)
 
