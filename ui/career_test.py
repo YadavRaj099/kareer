@@ -43,7 +43,7 @@ def show_career_test():
                 left:{runner_position}%;
                 top:-8px;
                 font-size:22px;
-            ">🏃</div>
+            ">🚀</div>
         </div>
         """,
         unsafe_allow_html=True,
