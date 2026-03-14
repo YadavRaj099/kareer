@@ -11,21 +11,21 @@ st.write(
 
 st.divider()
 
-# =========================
+# -------------------------
 # STREAM
-# =========================
+# -------------------------
 
 stream = st.selectbox(
     "Which academic stream interests you the most?",
     ["Science", "Commerce", "Arts"]
 )
 
-# =========================
+# -------------------------
 # INTEREST AREAS
-# =========================
+# -------------------------
 
 interests = st.multiselect(
-    "Which areas interest you the most?",
+    "Which areas interest you?",
     [
         "Technology",
         "Finance",
@@ -38,9 +38,9 @@ interests = st.multiselect(
     ]
 )
 
-# =========================
+# -------------------------
 # WORK STYLE
-# =========================
+# -------------------------
 
 work_style = st.selectbox(
     "What type of work do you enjoy?",
@@ -53,18 +53,18 @@ work_style = st.selectbox(
     ]
 )
 
-# =========================
+# -------------------------
 # RISK TOLERANCE
-# =========================
+# -------------------------
 
 risk = st.selectbox(
     "What is your risk tolerance?",
     ["Low", "Medium", "High"]
 )
 
-# =========================
+# -------------------------
 # SKILLS
-# =========================
+# -------------------------
 
 skills = st.multiselect(
     "Which skills interest you?",
@@ -80,12 +80,12 @@ skills = st.multiselect(
     ]
 )
 
-# =========================
+# -------------------------
 # WORK ENVIRONMENT
-# =========================
+# -------------------------
 
 environment = st.selectbox(
-    "What type of work environment do you prefer?",
+    "What work environment do you prefer?",
     [
         "Office",
         "Remote",
@@ -95,37 +95,21 @@ environment = st.selectbox(
     ]
 )
 
-# =========================
-# CAREER PRIORITY
-# =========================
-
-priority = st.selectbox(
-    "What matters most to you in a career?",
-    [
-        "High Salary",
-        "Work Life Balance",
-        "Impact on Society",
-        "Creativity",
-        "Leadership"
-    ]
-)
-
 st.divider()
 
-# =========================
-# SUBMIT
-# =========================
+# -------------------------
+# SUBMIT BUTTON
+# -------------------------
 
 if st.button("Find My Career Path", use_container_width=True):
 
     user_answers = {
         "stream": stream.lower(),
+        "interests": [i.lower() for i in interests],
         "work_style": work_style.lower(),
         "risk": risk.lower(),
         "skills": [s.lower() for s in skills],
-        "interests": [i.lower() for i in interests],
-        "environment": environment.lower(),
-        "priority": priority.lower()
+        "environment": environment.lower()
     }
 
     results = recommend(user_answers)
