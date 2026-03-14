@@ -129,7 +129,8 @@ st.markdown("""
 .ticker-container{
     margin-top:12px;
     margin-bottom:30px;
-    border:1px solid rgba(59,130,246,.25);
+    border:1px solid rgba(59,130,246,.35);
+    box-shadow:0 0 10px        rgba(59,130,246,.15);
     border-radius:14px;
     overflow:hidden;
     background:linear-gradient(180deg,#0f172a,#020617);
@@ -145,7 +146,7 @@ st.markdown("""
 .ticker-move{
     display:inline-block;
     padding-left:100%;
-    animation:tickerScroll 40s linear infinite;
+    animation:tickerScroll 55s linear infinite;
     color:#93c5fd;
     font-size:14px;
     font-weight:600;
