@@ -29,4 +29,4 @@ def score_career(career, user_answers, rules):
         if skill in career_tags:
             score += weights.get("skills", 1)
 
-    return score
+    return score 
