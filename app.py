@@ -110,6 +110,22 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+
+
+# -----------------------------
+# TOP BAR
+# -----------------------------
+from engine.trends import get_trends
+
+trends = get_trends()
+
+ticker_html = '<div class="ticker-container"><div class="ticker-wrap"><div class="ticker-move">'
+
+for t in trends:
+    ticker_html += f'<span class="ticker-item">🔥 {t}</span>'
+
+ticker_html += '</div></div></div>'
+
 .ticker-container{
     margin-top:10px;
     margin-bottom:30px;
@@ -144,20 +160,6 @@ st.markdown("""
     100%{transform:translateX(-100%);}
 }
 
-
-# -----------------------------
-# TOP BAR
-# -----------------------------
-from engine.trends import get_trends
-
-trends = get_trends()
-
-ticker_html = '<div class="ticker-container"><div class="ticker-wrap"><div class="ticker-move">'
-
-for t in trends:
-    ticker_html += f'<span class="ticker-item">🔥 {t}</span>'
-
-ticker_html += '</div></div></div>'
 
 st.markdown(ticker_html, unsafe_allow_html=True)
 
