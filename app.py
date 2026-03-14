@@ -1,11 +1,11 @@
 
-from engine.trends import get_random_trend
 import streamlit as st
 from components.styles import load_styles
 from ui.career_test import show_career_test
 from ui.explorer import show_explorer
 from ui.insights import show_insights
 from ui.results import show_results
+from engine.trends import get_trends
 
 st.set_page_config(page_title="Kareer", layout="wide")
 load_styles()
@@ -130,12 +130,13 @@ with nav4:
     if st.button("Insights", use_container_width=True):
         go("insights")
 
-from engine.trends import get_trends
-import streamlit as st
+# -----------------------------
+# TREND BAR
+# -----------------------------
 
 trends = get_trends()
 
-trend_html = "".join([f"<div class='trend-item'>{t}</div>" for t in trends])
+trend_html = "".join([f"<div class='trend-item'>🔥 {t}</div>" for t in trends])
 
 st.markdown(f"""
 <style>
@@ -143,10 +144,12 @@ st.markdown(f"""
 .trend-container {{
     width:100%;
     overflow:hidden;
-    border:2px solid #00c6ff;
-    border-radius:10px;
-    background:#0f172a;
+    border:2px solid #3b82f6;
+    border-radius:14px;
+    background:#020617;
     padding:10px;
+    margin-top:20px;
+    margin-bottom:30px;
 }}
 
 .trend-slider {{
@@ -157,8 +160,8 @@ st.markdown(f"""
 .trend-item {{
     min-width:100%;
     text-align:center;
-    font-size:18px;
-    color:white;
+    font-size:16px;
+    color:#e5e7eb;
     font-weight:500;
 }}
 
@@ -190,6 +193,7 @@ st.markdown(f"""
 </div>
 
 """, unsafe_allow_html=True)
+
 
 # -----------------------------
 # PAGE ROUTING
