@@ -1,24 +1,32 @@
-def find_similar_careers(target, careers, limit=3):
+def find_similar_careers(best_career, careers):
 
-target_tags = set(target.get("tags", []))
+    if not isinstance(best_career, dict):
+        return []
 
-similar = []
+    best_tags = best_career.get("tags", [])
 
-for career in careers:
+    if not isinstance(best_tags, list):
+        best_tags = []
 
-    if not isinstance(career, dict):
-        continue
+    best_tags = [str(t).lower() for t in best_tags]
 
-    if career.get("name") == target.get("name"):
-        continue
+    similar = []
 
-    tags = set(career.get("tags", []))
+    for career in careers:
 
-    overlap = len(target_tags & tags)
+        if not isinstance(career, dict):
+            continue
 
-    if overlap > 0:
-        similar.append((career.get("name"), overlap))
+        tags = career.get("tags", [])
 
-similar_sorted = sorted(similar, key=lambda x: x[1], reverse=True)
+        if not isinstance(tags, list):
+            continue
 
-return [name for name, _ in similar_sorted[:limit]]
+        tags = [str(t).lower() for t in tags]
+
+        common = set(best_tags) & set(tags)
+
+        if len(common) >= 2:
+            similar.append(career.get("name", "Unknown"))
+
+    return similar[:5]
