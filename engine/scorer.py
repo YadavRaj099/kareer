@@ -1,55 +1,32 @@
-def score_career(career, user, rules):
+def score_career(career, user_answers, rules):
 
-    weights = rules["weights"]
+    weights = rules.get("weights", {})
 
     score = 0
-    max_score = sum(weights.values())
 
-    career_tags = [t.lower() for t in career.get("tags", [])]
+    # Safe tags extraction
+    tags = career.get("tags", [])
 
-    # SUBJECT MATCH
-    user_subjects = [s.lower() for s in user.get("subjects", [])]
+    if not isinstance(tags, list):
+        tags = []
 
-    if any(sub in career_tags for sub in user_subjects):
-        score += weights["subjects_match"]
+    career_tags = [str(t).lower() for t in tags]
 
-    # INTEREST MATCH
-    interest = user.get("work_type", "").lower()
-
-    if interest in career_tags:
-        score += weights["interest_match"]
+    # STREAM MATCH
+    if user_answers.get("stream") in career_tags:
+        score += weights.get("stream", 1)
 
     # WORK STYLE
-    team_style = user.get("team_style", "").lower()
+    if user_answers.get("work_style") in career_tags:
+        score += weights.get("work_style", 1)
 
-    if team_style in career_tags:
-        score += weights["work_style_match"]
+    # RISK
+    if user_answers.get("risk") in career_tags:
+        score += weights.get("risk", 1)
 
-    # RISK MATCH
-    career_risk = career.get("risk", "").lower()
-    user_risk = user.get("risk", "").lower()
+    # SKILLS
+    for skill in user_answers.get("skills", []):
+        if skill in career_tags:
+            score += weights.get("skills", 1)
 
-    if career_risk == user_risk:
-        score += weights["risk_match"]
-
-    # EDUCATION YEARS
-    education_pref = user.get("education_commitment", "")
-
-    if education_pref == career.get("education_years"):
-        score += weights["education_match"]
-
-    # MOTIVATION
-    motivation = user.get("motivation", "").lower()
-
-    if motivation in career_tags:
-        score += weights["motivation_match"]
-
-    # LIFESTYLE
-    lifestyle = user.get("lifestyle", "").lower()
-
-    if lifestyle in career_tags:
-        score += weights["lifestyle_match"]
-
-    percentage = round((score / max_score) * 100, 2)
-
-    return percentage
+    return score
