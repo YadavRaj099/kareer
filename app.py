@@ -110,9 +110,57 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+.ticker-container{
+    margin-top:10px;
+    margin-bottom:30px;
+    border:1px solid rgba(59,130,246,0.2);
+    border-radius:12px;
+    overflow:hidden;
+    background:rgba(15,23,42,0.85);
+}
+
+.ticker-wrap{
+    width:100%;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.ticker-move{
+    display:inline-block;
+    padding-left:100%;
+    animation:ticker 28s linear infinite;
+    color:#93c5fd;
+    font-size:14px;
+    font-weight:600;
+}
+
+.ticker-item{
+    display:inline-block;
+    margin-right:70px;
+}
+
+@keyframes ticker{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-100%);}
+}
+
+
 # -----------------------------
 # TOP BAR
 # -----------------------------
+from engine.trends import get_trends
+
+trends = get_trends()
+
+ticker_html = '<div class="ticker-container"><div class="ticker-wrap"><div class="ticker-move">'
+
+for t in trends:
+    ticker_html += f'<span class="ticker-item">🔥 {t}</span>'
+
+ticker_html += '</div></div></div>'
+
+st.markdown(ticker_html, unsafe_allow_html=True)
+
 nav1, nav2, nav3, nav4 = st.columns([5, 1, 1, 1])
 
 with nav1:
