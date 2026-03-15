@@ -14,7 +14,7 @@ from ui.resume_analyzer import show_resume_analyzer   # NEW
 
 from engine.trends import get_trends
 
-
+from ui.resume_analyzer import show_resume_analyzer
 # =====================================================
 # 2️⃣ PAGE CONFIG
 # =====================================================
