@@ -6,7 +6,7 @@
 from functools import lru_cache
 from datetime import datetime
 
-from engine.resume_analyzer.parser import parse_resume
+from resume_analyser.parser import parse_resume
 from engine.resume_analyzer.skill_extractor import extract_skills
 from engine.resume_analyzer.resume_scorer import score_resume
 from engine.resume_analyzer.role_skills import (
