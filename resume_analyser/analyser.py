@@ -9,7 +9,7 @@ from datetime import datetime
 from resume_analyser.parser import parse_resume
 from engine.resume_analyzer.skill_extractor import extract_skills
 from engine.resume_analyzer.resume_scorer import score_resume
-from engine.resume_analyzer.role_skills import (
+from resume_analyzer.role_skills import (
     get_role_skills,
     list_available_roles
 )
