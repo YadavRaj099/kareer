@@ -1,79 +1,236 @@
 import streamlit as st
 
+
 def load_styles():
 
-    st.markdown(
-        """
-        <style>
+    st.markdown("""
+    <style>
 
-        /* Main background */
+    /* =========================================
+       GLOBAL PAGE
+    ========================================= */
 
-        .stApp {
-            background: linear-gradient(135deg,#0f172a,#020617);
-            color: #f8fafc;
+    html, body, [class*="css"]  {
+        font-family: Inter, system-ui, sans-serif;
+        background: linear-gradient(180deg,#020617,#020617);
+        color:#f8fafc;
+    }
+
+    .block-container{
+        padding-top:2rem;
+        padding-bottom:3rem;
+        max-width:1200px;
+    }
+
+
+    /* =========================================
+       NAVBAR
+    ========================================= */
+
+    .brand-title{
+        font-size:28px;
+        font-weight:800;
+        letter-spacing:-0.5px;
+        color:#f8fafc;
+    }
+
+    .nav-spacing{
+        height:10px;
+    }
+
+
+    /* =========================================
+       HERO SECTION
+    ========================================= */
+
+    .hero-title{
+        font-size:56px;
+        font-weight:800;
+        line-height:1.1;
+        color:#f8fafc;
+        margin-top:20px;
+        margin-bottom:10px;
+    }
+
+    .hero-subtitle{
+        font-size:18px;
+        line-height:1.7;
+        color:#94a3b8;
+        max-width:750px;
+        margin-bottom:30px;
+    }
+
+
+    /* =========================================
+       BUTTONS
+    ========================================= */
+
+    .stButton>button{
+        border-radius:12px;
+        height:44px;
+        font-weight:600;
+        border:1px solid #1e293b;
+        background:linear-gradient(180deg,#3b82f6,#2563eb);
+        color:white;
+        transition:all .2s ease;
+    }
+
+    .stButton>button:hover{
+        transform:translateY(-1px);
+        box-shadow:0 8px 20px rgba(0,0,0,.4);
+        border-color:#3b82f6;
+    }
+
+
+    /* =========================================
+       AI HERO BOX
+    ========================================= */
+
+    .ai-box{
+        border:1px solid #1e293b;
+        border-radius:20px;
+        padding:40px;
+        background:linear-gradient(180deg,#0f172a,#020617);
+        text-align:center;
+        margin-top:10px;
+        margin-bottom:30px;
+        box-shadow:0 20px 40px rgba(0,0,0,.35);
+    }
+
+    .ai-box h3{
+        font-size:26px;
+        font-weight:700;
+        margin-bottom:10px;
+    }
+
+
+    /* =========================================
+       FEATURE CARDS
+    ========================================= */
+
+    .feature-box{
+        background:linear-gradient(180deg,#0f172a,#020617);
+        border:1px solid #1e293b;
+        border-radius:18px;
+        padding:26px;
+        min-height:170px;
+        transition:all .25s ease;
+    }
+
+    .feature-box:hover{
+        transform:translateY(-6px);
+        border-color:#3b82f6;
+        box-shadow:0 20px 40px rgba(0,0,0,.35);
+    }
+
+    .feature-icon{
+        font-size:28px;
+        margin-bottom:6px;
+    }
+
+    .feature-title{
+        font-size:20px;
+        font-weight:700;
+        color:#f8fafc;
+    }
+
+    .feature-desc{
+        font-size:14px;
+        color:#94a3b8;
+        margin-top:6px;
+    }
+
+
+    /* =========================================
+       TAGS
+    ========================================= */
+
+    .mini-tag{
+        display:inline-block;
+        font-size:11px;
+        font-weight:600;
+        color:#93c5fd;
+        background:rgba(59,130,246,.12);
+        border:1px solid rgba(59,130,246,.25);
+        border-radius:999px;
+        padding:4px 8px;
+        margin-right:6px;
+        margin-top:8px;
+    }
+
+
+    /* =========================================
+       TICKER
+    ========================================= */
+
+    .ticker-container{
+        margin-top:10px;
+        margin-bottom:25px;
+        border:1px solid rgba(59,130,246,.35);
+        border-radius:12px;
+        overflow:hidden;
+        background:linear-gradient(180deg,#0f172a,#020617);
+    }
+
+    .ticker-wrap{
+        width:100%;
+        overflow:hidden;
+        white-space:nowrap;
+    }
+
+    .ticker-move{
+        display:inline-block;
+        padding-left:100%;
+        animation:tickerScroll 45s linear infinite;
+        font-size:14px;
+        color:#93c5fd;
+    }
+
+    .ticker-item{
+        margin-right:70px;
+        font-weight:600;
+    }
+
+    @keyframes tickerScroll{
+        0% {transform:translateX(0);}
+        100% {transform:translateX(-100%);}
+    }
+
+
+    /* =========================================
+       SPACING HELPERS
+    ========================================= */
+
+    .section-space{
+        height:30px;
+    }
+
+    .section-divider{
+        margin-top:10px;
+        margin-bottom:20px;
+        border-bottom:1px solid #1e293b;
+    }
+
+
+    /* =========================================
+       MOBILE IMPROVEMENTS
+    ========================================= */
+
+    @media (max-width: 768px){
+
+        .hero-title{
+            font-size:38px;
         }
 
-        /* Title styling */
-
-        h1, h2, h3 {
-            color: #f1f5f9;
-            font-weight: 700;
+        .hero-subtitle{
+            font-size:16px;
         }
 
-        /* Card styling */
-
-        .feature-card {
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 18px;
-            border: 1px solid #334155;
-            transition: all 0.25s ease;
-            cursor: pointer;
+        .feature-box{
+            min-height:160px;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border: 1px solid #3b82f6;
-            box-shadow: 0px 10px 25px rgba(0,0,0,0.4);
-        }
+    }
 
-        /* Card title */
-
-        .card-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        /* Card description */
-
-        .card-desc {
-            font-size: 15px;
-            color: #cbd5f5;
-        }
-
-        /* Buttons */
-
-        .stButton button {
-            background-color: #3b82f6;
-            border-radius: 10px;
-            border: none;
-            padding: 10px 18px;
-            color: white;
-            font-weight: 600;
-        }
-
-        .stButton button:hover {
-            background-color: #2563eb;
-        }
-
-        /* Progress bar */
-
-        .stProgress > div > div > div {
-            background-color: #3b82f6;
-        }
-
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+    </style>
+    """, unsafe_allow_html=True)
