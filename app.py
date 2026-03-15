@@ -119,24 +119,21 @@ if page == "home":
     # AI FEATURE BOX
 
     st.markdown("""
-    <div class="ai-box">
-        <h3>AI Resume Skill Analyzer</h3>
-        <p>
-        Upload your resume and instantly discover:
-        </p>
+<div class="ai-box">
 
-        <p>
-        • Career readiness score<br>
-        • Skills you are missing<br>
-        • Interview probability<br>
-        • Personalized roadmap
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+<h3>AI Resume Skill Analyzer</h3>
 
-    st.button("Upload Resume (Coming Soon)", disabled=True, use_container_width=True)
+<p>Upload your resume and instantly discover:</p>
 
-    st.markdown("<div class='section-space'></div>", unsafe_allow_html=True)
+<ul style="list-style:none;padding:0;margin-top:10px;color:#94a3b8">
+<li>• Career readiness score</li>
+<li>• Skills you are missing</li>
+<li>• Interview probability</li>
+<li>• Personalized roadmap</li>
+</ul>
+
+</div>
+""", unsafe_allow_html=True)
 
     # FEATURE CARDS
 
