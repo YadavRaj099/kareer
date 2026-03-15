@@ -10,6 +10,7 @@ from ui.career_test import show_career_test
 from ui.explorer import show_explorer
 from ui.insights import show_insights
 from ui.results import show_results
+from ui.resume_analyzer import show_resume_analyzer   # NEW
 
 from engine.trends import get_trends
 
@@ -43,7 +44,7 @@ def go(page_name: str):
 # 4️⃣ NAVBAR
 # =====================================================
 
-nav1, nav2, nav3, nav4, nav5 = st.columns([4,1.2,1.2,1.2,1.2])
+nav1, nav2, nav3, nav4, nav5, nav6 = st.columns([4,1.2,1.2,1.2,1.2,1.4])
 
 with nav1:
     st.markdown('<div class="brand-title">Kareer</div>', unsafe_allow_html=True)
@@ -63,6 +64,10 @@ with nav4:
 with nav5:
     if st.button("Explorer", use_container_width=True):
         go("explorer")
+
+with nav6:
+    if st.button("Resume AI", use_container_width=True):   # NEW
+        go("resume_analyzer")
 
 
 st.markdown("<div class='nav-spacing'></div>", unsafe_allow_html=True)
@@ -116,7 +121,10 @@ if page == "home":
 
     st.markdown("<div class='section-space'></div>", unsafe_allow_html=True)
 
-    # AI FEATURE BOX
+
+    # =================================================
+    # AI RESUME ANALYZER HERO
+    # =================================================
 
     st.markdown("""
 <div class="ai-box">
@@ -135,7 +143,15 @@ if page == "home":
 </div>
 """, unsafe_allow_html=True)
 
+    if st.button("Analyze My Resume", use_container_width=True):
+        go("resume_analyzer")
+
+    st.markdown("<div class='section-space'></div>", unsafe_allow_html=True)
+
+
+    # =================================================
     # FEATURE CARDS
+    # =================================================
 
     c1, c2 = st.columns(2)
     c3, c4 = st.columns(2)
@@ -200,7 +216,8 @@ if page == "home":
         </div>
         """, unsafe_allow_html=True)
 
-        st.button("Coming Soon", disabled=True, use_container_width=True)
+        if st.button("Open Resume Analyzer", use_container_width=True):
+            go("resume_analyzer")
 
 
 # =====================================================
@@ -218,3 +235,6 @@ elif page == "explorer":
 
 elif page == "insights":
     show_insights()
+
+elif page == "resume_analyzer":   # NEW PAGE
+    show_resume_analyzer()
