@@ -1,11 +1,17 @@
 import streamlit as st
 import time
 
-from resume_analyzer.analyzer import analyze_resume, generate_summary
-from resume_analyzer.role_skills import list_available_roles
-
 
 def show_resume_analyzer():
+
+    # Safe imports (prevents app crash if backend fails)
+    try:
+        from resume_analyzer.analyzer import analyze_resume, generate_summary
+        from resume_analyzer.role_skills import list_available_roles
+    except Exception as e:
+        st.error("Backend module failed to load.")
+        st.code(str(e))
+        return
 
     # ==================================================
     # HERO
@@ -80,12 +86,11 @@ def show_resume_analyzer():
     if analyze:
 
         if not uploaded_file:
-
             st.warning("Please upload a resume first.")
             return
 
         # ==================================================
-        # AI PROGRESS LOADER
+        # LOADING SIMULATION
         # ==================================================
 
         progress_bar = st.progress(0)
@@ -101,7 +106,6 @@ def show_resume_analyzer():
         ]
 
         for i, step in enumerate(steps):
-
             status.info(f"⚙️ {step}")
             progress_bar.progress((i + 1) / len(steps))
             time.sleep(0.4)
@@ -161,11 +165,10 @@ def show_resume_analyzer():
 
         if skills:
 
-            tag_html = ""
+            tags = ""
 
             for skill in skills:
-
-                tag_html += f"""
+                tags += f"""
                 <span style="
                     padding:6px 14px;
                     border-radius:999px;
@@ -180,10 +183,9 @@ def show_resume_analyzer():
                 </span>
                 """
 
-            st.markdown(tag_html, unsafe_allow_html=True)
+            st.markdown(tags, unsafe_allow_html=True)
 
         else:
-
             st.info("No skills detected in resume.")
 
         st.markdown("---")
@@ -197,13 +199,9 @@ def show_resume_analyzer():
         gaps = summary.get("missing_skills", [])
 
         if gaps:
-
             for gap in gaps:
-
                 st.warning(gap)
-
         else:
-
             st.success("Your resume already covers required skills.")
 
         st.markdown("---")
@@ -217,21 +215,12 @@ def show_resume_analyzer():
         rec = summary.get("recommended_roles", [])
 
         if rec:
-
             for role in rec:
-
                 st.markdown(f"• **{role.replace('_',' ').title()}**")
-
         else:
-
             st.info("No alternative roles detected.")
 
         st.markdown("<div style='height:25px'></div>", unsafe_allow_html=True)
 
-        # ==================================================
-        # REANALYZE
-        # ==================================================
-
         if st.button("Analyze Another Resume", use_container_width=True):
-
             st.rerun()
