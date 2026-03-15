@@ -3,7 +3,7 @@
 # Compatible with Kareer Resume Analyzer Architecture
 # =====================================================
 
-from engine.resume_analyzer.role_skills import get_role_skills
+from resume_analyzer.role_skills import get_role_skills
 
 
 # =====================================================
