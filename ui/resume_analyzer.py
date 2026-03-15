@@ -2,7 +2,7 @@ import streamlit as st
 import time
 
 from resume_analyzer.analyzer import analyze_resume, generate_summary
-from resume_analyzer.role_skills import list_available_roles
+from resume_analyzer.role_skills import list_available_roles 
 
 def show_resume_analyzer():
 
