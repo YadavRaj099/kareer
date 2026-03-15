@@ -10,9 +10,9 @@ def load_styles():
        GLOBAL PAGE
     ========================================= */
 
-    html, body, [class*="css"]  {
-        font-family: Inter, system-ui, sans-serif;
-        background: linear-gradient(180deg,#020617,#020617);
+    html, body, [class*="css"] {
+        font-family: Inter, system-ui, -apple-system, sans-serif;
+        background: radial-gradient(circle at top, #0b1220, #020617);
         color:#f8fafc;
     }
 
@@ -35,7 +35,7 @@ def load_styles():
     }
 
     .nav-spacing{
-        height:10px;
+        height:12px;
     }
 
 
@@ -43,20 +43,33 @@ def load_styles():
        HERO SECTION
     ========================================= */
 
+    .hero-badge{
+        display:inline-block;
+        font-size:12px;
+        font-weight:600;
+        padding:6px 12px;
+        border-radius:999px;
+        background:rgba(59,130,246,.15);
+        border:1px solid rgba(59,130,246,.35);
+        color:#93c5fd;
+        margin-bottom:10px;
+    }
+
     .hero-title{
         font-size:56px;
         font-weight:800;
-        line-height:1.1;
+        line-height:1.05;
         color:#f8fafc;
-        margin-top:20px;
+        margin-top:10px;
         margin-bottom:10px;
+        letter-spacing:-1px;
     }
 
     .hero-subtitle{
         font-size:18px;
         line-height:1.7;
         color:#94a3b8;
-        max-width:750px;
+        max-width:720px;
         margin-bottom:30px;
     }
 
@@ -67,18 +80,18 @@ def load_styles():
 
     .stButton>button{
         border-radius:12px;
-        height:44px;
+        height:46px;
         font-weight:600;
-        border:1px solid #1e293b;
+        border:1px solid rgba(59,130,246,.35);
         background:linear-gradient(180deg,#3b82f6,#2563eb);
         color:white;
         transition:all .2s ease;
     }
 
     .stButton>button:hover{
-        transform:translateY(-1px);
-        box-shadow:0 8px 20px rgba(0,0,0,.4);
-        border-color:#3b82f6;
+        transform:translateY(-2px);
+        box-shadow:0 10px 24px rgba(0,0,0,.45);
+        border-color:#60a5fa;
     }
 
 
@@ -87,14 +100,14 @@ def load_styles():
     ========================================= */
 
     .ai-box{
-        border:1px solid #1e293b;
-        border-radius:20px;
+        border:1px solid rgba(59,130,246,.25);
+        border-radius:22px;
         padding:40px;
         background:linear-gradient(180deg,#0f172a,#020617);
         text-align:center;
         margin-top:10px;
         margin-bottom:30px;
-        box-shadow:0 20px 40px rgba(0,0,0,.35);
+        box-shadow:0 25px 50px rgba(0,0,0,.45);
     }
 
     .ai-box h3{
@@ -111,7 +124,7 @@ def load_styles():
     .feature-box{
         background:linear-gradient(180deg,#0f172a,#020617);
         border:1px solid #1e293b;
-        border-radius:18px;
+        border-radius:20px;
         padding:26px;
         min-height:170px;
         transition:all .25s ease;
@@ -170,6 +183,7 @@ def load_styles():
         border-radius:12px;
         overflow:hidden;
         background:linear-gradient(180deg,#0f172a,#020617);
+        box-shadow:0 8px 20px rgba(0,0,0,.3);
     }
 
     .ticker-wrap{
@@ -191,6 +205,10 @@ def load_styles():
         font-weight:600;
     }
 
+    .ticker-container:hover .ticker-move{
+        animation-play-state:paused;
+    }
+
     @keyframes tickerScroll{
         0% {transform:translateX(0);}
         100% {transform:translateX(-100%);}
@@ -206,20 +224,20 @@ def load_styles():
     }
 
     .section-divider{
-        margin-top:10px;
-        margin-bottom:20px;
+        margin-top:12px;
+        margin-bottom:24px;
         border-bottom:1px solid #1e293b;
     }
 
 
     /* =========================================
-       MOBILE IMPROVEMENTS
+       MOBILE OPTIMIZATION
     ========================================= */
 
     @media (max-width: 768px){
 
         .hero-title{
-            font-size:38px;
+            font-size:36px;
         }
 
         .hero-subtitle{
@@ -227,7 +245,11 @@ def load_styles():
         }
 
         .feature-box{
-            min-height:160px;
+            min-height:150px;
+        }
+
+        .ai-box{
+            padding:30px;
         }
 
     }
