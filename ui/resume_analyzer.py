@@ -2,66 +2,69 @@ import streamlit as st
 import time
 
 from resume_analyzer.analyzer import analyze_resume, generate_summary
-from resume_analyzer.role_skills import list_available_roles 
+from resume_analyzer.role_skills import list_available_roles
+
 
 def show_resume_analyzer():
 
     # ==================================================
-    # HERO SECTION
+    # HERO
     # ==================================================
 
     st.markdown(
         """
-        <h1 style="font-size:42px;margin-bottom:5px;">
+        <h1 style="font-size:44px;margin-bottom:5px;">
         AI Resume Skill Analyzer
         </h1>
 
         <p style="color:#94a3b8;font-size:17px;margin-top:0;">
-        Upload your resume and instantly discover your career readiness,
+        Upload your resume and discover your career readiness,
         skill gaps, and interview probability.
         </p>
         """,
         unsafe_allow_html=True
     )
 
+    st.markdown("<div style='height:25px'></div>", unsafe_allow_html=True)
+
+    # ==================================================
+    # UPLOAD PANEL
+    # ==================================================
+
+    with st.container():
+
+        st.markdown(
+            """
+            <div style="
+                border:1px solid #1e293b;
+                padding:28px;
+                border-radius:18px;
+                background:linear-gradient(180deg,#0f172a,#020617);
+            ">
+            <h3 style="margin-bottom:6px;">Upload Resume</h3>
+            <p style="color:#94a3b8;margin-top:0;">
+            Supported formats: PDF, DOCX, JPG, PNG
+            </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        uploaded_file = st.file_uploader(
+            " ",
+            type=["pdf", "docx", "jpg", "jpeg", "png"]
+        )
+
     st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 
     # ==================================================
-    # UPLOAD CARD
-    # ==================================================
-
-    st.markdown(
-        """
-        <div style="
-            border:1px solid #1e293b;
-            padding:28px;
-            border-radius:16px;
-            background:linear-gradient(180deg,#0f172a,#020617);
-        ">
-        <h3 style="margin-bottom:6px;">Upload Resume</h3>
-        <p style="color:#94a3b8;margin-top:0;">
-        Supported formats: PDF, DOCX, JPG, PNG
-        </p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    uploaded_file = st.file_uploader(
-        " ",
-        type=["pdf", "docx", "jpg", "jpeg", "png"]
-    )
-
-    st.markdown("<div style='height:15px'></div>", unsafe_allow_html=True)
-
-    # ==================================================
-    # ROLE SELECTOR
+    # ROLE SELECTION
     # ==================================================
 
     roles = list_available_roles()
 
     target_role = st.selectbox(
-        "Target Career",
+        "🎯 Target Career",
         roles
     )
 
@@ -71,7 +74,7 @@ def show_resume_analyzer():
     )
 
     # ==================================================
-    # ANALYSIS START
+    # START ANALYSIS
     # ==================================================
 
     if analyze:
@@ -82,10 +85,11 @@ def show_resume_analyzer():
             return
 
         # ==================================================
-        # AI LOADING SIMULATION
+        # AI PROGRESS LOADER
         # ==================================================
 
-        loader = st.empty()
+        progress_bar = st.progress(0)
+        status = st.empty()
 
         steps = [
             "Reading resume...",
@@ -96,12 +100,14 @@ def show_resume_analyzer():
             "Generating insights..."
         ]
 
-        for step in steps:
+        for i, step in enumerate(steps):
 
-            loader.info(f"⚙️ {step}")
-            time.sleep(0.5)
+            status.info(f"⚙️ {step}")
+            progress_bar.progress((i + 1) / len(steps))
+            time.sleep(0.4)
 
-        loader.empty()
+        status.empty()
+        progress_bar.empty()
 
         # ==================================================
         # RUN ANALYSIS
@@ -110,7 +116,6 @@ def show_resume_analyzer():
         try:
 
             analysis = analyze_resume(uploaded_file, target_role)
-
             summary = generate_summary(analysis)
 
         except Exception as e:
@@ -122,8 +127,10 @@ def show_resume_analyzer():
         st.markdown("<div style='height:30px'></div>", unsafe_allow_html=True)
 
         # ==================================================
-        # SCORE CARDS
+        # SCORE PANEL
         # ==================================================
+
+        st.markdown("### 📊 Analysis Summary")
 
         col1, col2, col3 = st.columns(3)
 
@@ -148,31 +155,32 @@ def show_resume_analyzer():
         # DETECTED SKILLS
         # ==================================================
 
-        st.subheader("Detected Skills")
+        st.subheader("🧠 Detected Skills")
 
         skills = analysis.get("skills", {}).get("skills", [])
 
         if skills:
 
-            tags = ""
+            tag_html = ""
 
             for skill in skills:
 
-                tags += f"""
+                tag_html += f"""
                 <span style="
-                    padding:6px 12px;
+                    padding:6px 14px;
                     border-radius:999px;
                     border:1px solid #334155;
                     margin-right:6px;
                     display:inline-block;
                     margin-bottom:8px;
                     font-size:13px;
+                    background:#020617;
                 ">
                 {skill}
                 </span>
                 """
 
-            st.markdown(tags, unsafe_allow_html=True)
+            st.markdown(tag_html, unsafe_allow_html=True)
 
         else:
 
@@ -184,7 +192,7 @@ def show_resume_analyzer():
         # SKILL GAPS
         # ==================================================
 
-        st.subheader("Skill Gaps")
+        st.subheader("⚠️ Skill Gaps")
 
         gaps = summary.get("missing_skills", [])
 
@@ -204,7 +212,7 @@ def show_resume_analyzer():
         # RECOMMENDED CAREERS
         # ==================================================
 
-        st.subheader("Recommended Careers")
+        st.subheader("🚀 Recommended Careers")
 
         rec = summary.get("recommended_roles", [])
 
@@ -218,10 +226,10 @@ def show_resume_analyzer():
 
             st.info("No alternative roles detected.")
 
-        st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
+        st.markdown("<div style='height:25px'></div>", unsafe_allow_html=True)
 
         # ==================================================
-        # REANALYZE BUTTON
+        # REANALYZE
         # ==================================================
 
         if st.button("Analyze Another Resume", use_container_width=True):
