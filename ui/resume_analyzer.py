@@ -6,7 +6,9 @@ from resume_analyser.analyzer import (
     generate_summary
 )
 
-from resume_analyser.role_skills import list_available_roles
+from resume_analyser.role_skills import (
+    list_available_roles
+)
 
 
 def show_resume_analyzer():
