@@ -137,6 +137,41 @@ st.markdown("""
     font-weight:600;
 }
 
+st.markdown("""
+<style>
+
+.ticker-container{
+    margin-top:10px;
+    margin-bottom:25px;
+    border:1px solid rgba(59,130,246,.35);
+    border-radius:12px;
+    overflow:hidden;
+    background:linear-gradient(180deg,#0f172a,#020617);
+}
+
+.ticker-wrap{
+    width:100%;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.ticker-move{
+    display:inline-block;
+    padding-left:100%;
+    animation:tickerScroll 40s linear infinite;
+    font-size:14px;
+    color:#93c5fd;
+}
+
+.ticker-item{
+    margin-right:60px;
+}
+
+@keyframes tickerScroll{
+    0% {transform:translateX(0);}
+    100% {transform:translateX(-100%);}
+}
+
 </style>
 """, unsafe_allow_html=True)
 
