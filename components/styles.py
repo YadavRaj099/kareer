@@ -6,14 +6,15 @@ def load_styles():
     st.markdown("""
     <style>
 
+
     /* =========================================
        GLOBAL PAGE
     ========================================= */
 
     html, body, [class*="css"] {
         font-family: Inter, system-ui, -apple-system, sans-serif;
-        background: radial-gradient(circle at top, #0b1220, #020617);
-        color:#f8fafc;
+        background: radial-gradient(circle at top, #0f172a, #020617);
+        color:#e2e8f0;
     }
 
     .block-container{
@@ -21,6 +22,7 @@ def load_styles():
         padding-bottom:3rem;
         max-width:1200px;
     }
+
 
 
     /* =========================================
@@ -39,6 +41,7 @@ def load_styles():
     }
 
 
+
     /* =========================================
        HERO SECTION
     ========================================= */
@@ -49,9 +52,11 @@ def load_styles():
         font-weight:600;
         padding:6px 12px;
         border-radius:999px;
-        background:rgba(59,130,246,.15);
-        border:1px solid rgba(59,130,246,.35);
-        color:#93c5fd;
+
+        background:rgba(20,184,166,.15);
+        border:1px solid rgba(20,184,166,.35);
+        color:#5eead4;
+
         margin-bottom:10px;
     }
 
@@ -74,40 +79,51 @@ def load_styles():
     }
 
 
+
     /* =========================================
-       BUTTONS
+       BUTTONS (TRUST CALM TEAL)
     ========================================= */
 
     .stButton>button{
         border-radius:12px;
         height:46px;
         font-weight:600;
-        border:1px solid rgba(59,130,246,.35);
-        background:linear-gradient(180deg,#3b82f6,#2563eb);
+
+        background:#14b8a6;
+        border:none;
         color:white;
+
         transition:all .2s ease;
     }
 
     .stButton>button:hover{
+        background:#0d9488;
         transform:translateY(-2px);
-        box-shadow:0 10px 24px rgba(0,0,0,.45);
-        border-color:#60a5fa;
+        box-shadow:0 10px 25px rgba(0,0,0,.4);
     }
 
 
+
     /* =========================================
-       AI HERO BOX
+       GLASS AI BOX
     ========================================= */
 
     .ai-box{
-        border:1px solid rgba(59,130,246,.25);
+
         border-radius:22px;
         padding:40px;
-        background:linear-gradient(180deg,#0f172a,#020617);
+
+        background: rgba(30,41,59,0.45);
+        backdrop-filter: blur(14px);
+
+        border:1px solid rgba(148,163,184,0.15);
+
         text-align:center;
+
         margin-top:10px;
         margin-bottom:30px;
-        box-shadow:0 25px 50px rgba(0,0,0,.45);
+
+        box-shadow:0 20px 40px rgba(0,0,0,.35);
     }
 
     .ai-box h3{
@@ -117,22 +133,29 @@ def load_styles():
     }
 
 
+
     /* =========================================
-       FEATURE CARDS
+       FEATURE CARDS (GLASS)
     ========================================= */
 
     .feature-box{
-        background:linear-gradient(180deg,#0f172a,#020617);
-        border:1px solid #1e293b;
+
+        background: rgba(30,41,59,0.45);
+        backdrop-filter: blur(14px);
+
+        border:1px solid rgba(148,163,184,0.15);
+
         border-radius:20px;
         padding:26px;
+
         min-height:170px;
+
         transition:all .25s ease;
     }
 
     .feature-box:hover{
         transform:translateY(-6px);
-        border-color:#3b82f6;
+        border-color:rgba(20,184,166,0.6);
         box-shadow:0 20px 40px rgba(0,0,0,.35);
     }
 
@@ -154,36 +177,47 @@ def load_styles():
     }
 
 
+
     /* =========================================
        TAGS
     ========================================= */
 
     .mini-tag{
         display:inline-block;
+
         font-size:11px;
         font-weight:600;
-        color:#93c5fd;
-        background:rgba(59,130,246,.12);
-        border:1px solid rgba(59,130,246,.25);
+
+        color:#5eead4;
+        background:rgba(20,184,166,.12);
+
+        border:1px solid rgba(20,184,166,.25);
+
         border-radius:999px;
         padding:4px 8px;
+
         margin-right:6px;
         margin-top:8px;
     }
 
 
+
     /* =========================================
-       TICKER
+       TREND TICKER
     ========================================= */
 
     .ticker-container{
         margin-top:10px;
         margin-bottom:25px;
-        border:1px solid rgba(59,130,246,.35);
-        border-radius:12px;
+
+        border-radius:14px;
+
+        background: rgba(30,41,59,0.45);
+        backdrop-filter: blur(14px);
+
+        border:1px solid rgba(148,163,184,0.15);
+
         overflow:hidden;
-        background:linear-gradient(180deg,#0f172a,#020617);
-        box-shadow:0 8px 20px rgba(0,0,0,.3);
     }
 
     .ticker-wrap{
@@ -196,8 +230,9 @@ def load_styles():
         display:inline-block;
         padding-left:100%;
         animation:tickerScroll 45s linear infinite;
+
         font-size:14px;
-        color:#93c5fd;
+        color:#5eead4;
     }
 
     .ticker-item{
@@ -215,6 +250,7 @@ def load_styles():
     }
 
 
+
     /* =========================================
        SPACING HELPERS
     ========================================= */
@@ -226,15 +262,16 @@ def load_styles():
     .section-divider{
         margin-top:12px;
         margin-bottom:24px;
-        border-bottom:1px solid #1e293b;
+        border-bottom:1px solid rgba(148,163,184,0.15);
     }
+
 
 
     /* =========================================
        MOBILE OPTIMIZATION
     ========================================= */
 
-    @media (max-width: 768px){
+    @media (max-width:768px){
 
         .hero-title{
             font-size:36px;
