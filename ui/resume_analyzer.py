@@ -36,6 +36,9 @@ def show_resume_analyzer():
 
     st.markdown("<div style='height:25px'></div>", unsafe_allow_html=True)
 
+    st.caption(
+"Analysis is based on skill matching and may not fully reflect recruiter evaluation."
+)
 
     # ==================================================
     # UPLOAD PANEL
