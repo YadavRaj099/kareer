@@ -20,16 +20,20 @@ def show_career_test():
     step = st.session_state.step
     total = len(questions)
 
+    # -----------------------------
+    # PAGE TITLE
+    # -----------------------------
+
     st.title("Career Path Finder")
 
     # -----------------------------
     # STEP INDICATOR
     # -----------------------------
 
-    st.caption(f"Step {step + 1} of {total}")
+    st.caption(f"Question {step + 1} of {total}")
 
     # -----------------------------
-    # PROGRESS BAR + ROCKET
+    # PROGRESS BAR
     # -----------------------------
 
     progress = (step + 1) / total
@@ -37,11 +41,11 @@ def show_career_test():
 
     st.markdown(
         f"""
-<div style="width:100%;background:#1e293b;border-radius:12px;height:24px;position:relative;margin-bottom:30px;">
+<div style="width:100%;background:#1e293b;border-radius:12px;height:24px;position:relative;margin-bottom:35px;">
 
-<div style="width:{runner_position}%;background:#3b82f6;height:100%;border-radius:12px;transition:width .4s ease;"></div>
+<div style="width:{runner_position}%;background:#22c55e;height:100%;border-radius:12px;transition:width .4s ease;"></div>
 
-<div style="position:absolute;left:{runner_position}%;transform:translateX(-50%);top:-14px;font-size:24px;">
+<div style="position:absolute;left:{runner_position}%;transform:translateX(-50%);top:-14px;font-size:22px;">
 🚀
 </div>
 
@@ -56,33 +60,39 @@ def show_career_test():
 
     key, q = questions[step]
 
-    st.subheader(q["question"])
-    st.write("")
+    st.markdown(
+        f"""
+        <div style="font-size:22px;font-weight:600;margin-bottom:20px;">
+        {q["question"]}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     # -----------------------------
-    # CARD STYLE SINGLE SELECT
+    # SINGLE SELECT (MCQ STYLE)
     # -----------------------------
 
     if q["type"] == "single":
 
         selected = st.session_state.answers.get(key)
 
-        cols = st.columns(len(q["options"]))
-
         for i, option in enumerate(q["options"]):
 
             is_selected = selected == option
 
-            label = option
+            button_label = option
+
             if is_selected:
-                label = f"✅ {option}"
+                button_label = f"✅ {option}"
 
-            with cols[i]:
-
-                if st.button(label, use_container_width=True, key=f"{key}_{i}"):
-
-                    st.session_state.answers[key] = option
-                    st.rerun()
+            if st.button(
+                button_label,
+                use_container_width=True,
+                key=f"{key}_{i}"
+            ):
+                st.session_state.answers[key] = option
+                st.rerun()
 
     # -----------------------------
     # MULTI SELECT
@@ -99,7 +109,7 @@ def show_career_test():
         st.session_state.answers[key] = answer
 
     # -----------------------------
-    # OPTIONAL AI TEXT INPUT
+    # OPTIONAL NOTES
     # -----------------------------
 
     st.write("")
