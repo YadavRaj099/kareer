@@ -1,10 +1,12 @@
 import streamlit as st
 import time
+import plotly.express as px
+import pandas as pd
 
 
 def show_resume_analyzer():
 
-    # Safe imports (prevents app crash if backend fails)
+    # Safe imports
     try:
         from resume_analyzer.analyzer import analyze_resume, generate_summary
         from resume_analyzer.role_skills import list_available_roles
@@ -17,51 +19,45 @@ def show_resume_analyzer():
     # HERO
     # ==================================================
 
-    st.markdown(
-        """
-        <h1 style="font-size:44px;margin-bottom:5px;">
-        AI Resume Skill Analyzer
-        </h1>
+    st.markdown("""
+    <h1 style="font-size:44px;margin-bottom:5px;">
+    AI Resume Skill Analyzer
+    </h1>
 
-        <p style="color:#94a3b8;font-size:17px;margin-top:0;">
-        Upload your resume and discover your career readiness,
-        skill gaps, and interview probability.
-        </p>
-        """,
-        unsafe_allow_html=True
-    )
+    <p style="color:#94a3b8;font-size:17px;margin-top:0;">
+    Upload your resume and discover career readiness,
+    skill gaps, and interview probability.
+    </p>
+    """, unsafe_allow_html=True)
 
     st.markdown("<div style='height:25px'></div>", unsafe_allow_html=True)
+
 
     # ==================================================
     # UPLOAD PANEL
     # ==================================================
 
-    with st.container():
+    st.markdown("""
+    <div style="
+        border:1px solid #1e293b;
+        padding:28px;
+        border-radius:18px;
+        background:linear-gradient(180deg,#0f172a,#020617);
+    ">
+    <h3 style="margin-bottom:6px;">Upload Resume</h3>
+    <p style="color:#94a3b8;margin-top:0;">
+    Supported formats: PDF, DOCX
+    </p>
+    </div>
+    """, unsafe_allow_html=True)
 
-        st.markdown(
-            """
-            <div style="
-                border:1px solid #1e293b;
-                padding:28px;
-                border-radius:18px;
-                background:linear-gradient(180deg,#0f172a,#020617);
-            ">
-            <h3 style="margin-bottom:6px;">Upload Resume</h3>
-            <p style="color:#94a3b8;margin-top:0;">
-            Supported formats: PDF, DOCX, JPG, PNG
-            </p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-        uploaded_file = st.file_uploader(
-            " ",
-            type=["pdf", "docx", "jpg", "jpeg", "png"]
-        )
+    uploaded_file = st.file_uploader(
+        " ",
+        type=["pdf", "docx"]
+    )
 
     st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
+
 
     # ==================================================
     # ROLE SELECTION
@@ -69,15 +65,20 @@ def show_resume_analyzer():
 
     roles = list_available_roles()
 
+    if not roles:
+        st.warning("No roles available in the career database.")
+        return
+
     target_role = st.selectbox(
         "🎯 Target Career",
         roles
     )
 
     analyze = st.button(
-        "🚀 Analyze Resume",
+        "Analyze Resume",
         use_container_width=True
     )
+
 
     # ==================================================
     # START ANALYSIS
@@ -88,6 +89,7 @@ def show_resume_analyzer():
         if not uploaded_file:
             st.warning("Please upload a resume first.")
             return
+
 
         # ==================================================
         # LOADING SIMULATION
@@ -106,12 +108,13 @@ def show_resume_analyzer():
         ]
 
         for i, step in enumerate(steps):
-            status.info(f"⚙️ {step}")
+            status.info(f"{step}")
             progress_bar.progress((i + 1) / len(steps))
-            time.sleep(0.4)
+            time.sleep(0.35)
 
         status.empty()
         progress_bar.empty()
+
 
         # ==================================================
         # RUN ANALYSIS
@@ -128,7 +131,9 @@ def show_resume_analyzer():
             st.code(str(e))
             return
 
+
         st.markdown("<div style='height:30px'></div>", unsafe_allow_html=True)
+
 
         # ==================================================
         # SCORE PANEL
@@ -154,6 +159,71 @@ def show_resume_analyzer():
         )
 
         st.markdown("---")
+
+
+        # ==================================================
+        # SKILL INTELLIGENCE RADAR
+        # ==================================================
+
+        categories = summary.get("skill_categories", {})
+
+        if categories:
+
+            st.subheader("🧠 Skill Intelligence")
+
+            df = pd.DataFrame({
+                "Category": list(categories.keys()),
+                "Score": list(categories.values())
+            })
+
+            fig = px.line_polar(
+                df,
+                r="Score",
+                theta="Category",
+                line_close=True
+            )
+
+            fig.update_traces(fill="toself")
+
+            fig.update_layout(
+                template="plotly_dark",
+                height=400
+            )
+
+            st.plotly_chart(fig, use_container_width=True)
+
+            st.markdown("---")
+
+
+        # ==================================================
+        # RESUME METRICS
+        # ==================================================
+
+        metrics = analysis.get("analysis_metrics", {})
+
+        if metrics:
+
+            st.subheader("📈 Resume Metrics")
+
+            m1, m2, m3 = st.columns(3)
+
+            m1.metric(
+                "Resume Length",
+                f"{metrics.get('resume_length_words',0)} words"
+            )
+
+            m2.metric(
+                "Skills Detected",
+                metrics.get("skills_detected",0)
+            )
+
+            m3.metric(
+                "Skill Density",
+                f"{metrics.get('skill_density_percent',0)}%"
+            )
+
+            st.markdown("---")
+
 
         # ==================================================
         # DETECTED SKILLS
@@ -190,6 +260,7 @@ def show_resume_analyzer():
 
         st.markdown("---")
 
+
         # ==================================================
         # SKILL GAPS
         # ==================================================
@@ -205,6 +276,7 @@ def show_resume_analyzer():
             st.success("Your resume already covers required skills.")
 
         st.markdown("---")
+
 
         # ==================================================
         # RECOMMENDED CAREERS
