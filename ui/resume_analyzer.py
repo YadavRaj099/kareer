@@ -6,7 +6,10 @@ import pandas as pd
 
 def show_resume_analyzer():
 
-    # Safe imports
+    # ==================================================
+    # SAFE IMPORTS
+    # ==================================================
+
     try:
         from resume_analyzer.analyzer import analyze_resume, generate_summary
         from resume_analyzer.role_skills import list_available_roles
@@ -14,6 +17,7 @@ def show_resume_analyzer():
         st.error("Backend module failed to load.")
         st.code(str(e))
         return
+
 
     # ==================================================
     # HERO
@@ -51,10 +55,7 @@ def show_resume_analyzer():
     </div>
     """, unsafe_allow_html=True)
 
-    uploaded_file = st.file_uploader(
-        " ",
-        type=["pdf", "docx"]
-    )
+    uploaded_file = st.file_uploader(" ", type=["pdf", "docx"])
 
     st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 
@@ -71,13 +72,11 @@ def show_resume_analyzer():
 
     target_role = st.selectbox(
         "🎯 Target Career",
-        roles
+        roles,
+        format_func=lambda x: x.replace("_", " ").title()
     )
 
-    analyze = st.button(
-        "Analyze Resume",
-        use_container_width=True
-    )
+    analyze = st.button("Analyze Resume", use_container_width=True)
 
 
     # ==================================================
@@ -101,14 +100,14 @@ def show_resume_analyzer():
         steps = [
             "Reading resume...",
             "Extracting skills...",
-            "Analyzing career alignment...",
+            "Analyzing role alignment...",
             "Calculating readiness score...",
             "Estimating interview probability...",
             "Generating insights..."
         ]
 
         for i, step in enumerate(steps):
-            status.info(f"{step}")
+            status.info(step)
             progress_bar.progress((i + 1) / len(steps))
             time.sleep(0.35)
 
@@ -132,7 +131,9 @@ def show_resume_analyzer():
             return
 
 
-        st.markdown("<div style='height:30px'></div>", unsafe_allow_html=True)
+        st.success("Analysis completed")
+
+        st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 
 
         # ==================================================
@@ -143,20 +144,30 @@ def show_resume_analyzer():
 
         col1, col2, col3 = st.columns(3)
 
-        col1.metric(
-            "Resume Score",
-            f"{summary.get('resume_score',0)}%"
-        )
+        score = summary.get("resume_score", 0)
+
+        col1.metric("Resume Score", f"{score}%")
 
         col2.metric(
             "Readiness",
-            summary.get("readiness","Unknown")
+            summary.get("readiness", "Unknown")
         )
 
         col3.metric(
             "Interview Probability",
-            summary.get("interview_probability","Unknown")
+            summary.get("interview_probability", "Unknown")
         )
+
+        # Resume strength feedback
+
+        if score < 40:
+            st.warning("Your resume needs improvement for this role.")
+
+        elif score < 70:
+            st.info("Your resume is partially aligned with this role.")
+
+        else:
+            st.success("Your resume is well aligned with this role.")
 
         st.markdown("---")
 
@@ -187,7 +198,8 @@ def show_resume_analyzer():
 
             fig.update_layout(
                 template="plotly_dark",
-                height=400
+                height=500,
+                margin=dict(l=30, r=30, t=30, b=30)
             )
 
             st.plotly_chart(fig, use_container_width=True)
@@ -235,17 +247,14 @@ def show_resume_analyzer():
 
         if skills:
 
-            tags = ""
+            html = '<div style="display:flex;flex-wrap:wrap;gap:8px;">'
 
             for skill in skills:
-                tags += f"""
+                html += f"""
                 <span style="
                     padding:6px 14px;
                     border-radius:999px;
                     border:1px solid #334155;
-                    margin-right:6px;
-                    display:inline-block;
-                    margin-bottom:8px;
                     font-size:13px;
                     background:#020617;
                 ">
@@ -253,7 +262,9 @@ def show_resume_analyzer():
                 </span>
                 """
 
-            st.markdown(tags, unsafe_allow_html=True)
+            html += "</div>"
+
+            st.markdown(html, unsafe_allow_html=True)
 
         else:
             st.info("No skills detected in resume.")
@@ -270,8 +281,21 @@ def show_resume_analyzer():
         gaps = summary.get("missing_skills", [])
 
         if gaps:
+
             for gap in gaps:
-                st.warning(gap)
+
+                st.markdown(f"""
+                <div style="
+                    background:#1f2937;
+                    border-left:4px solid #f59e0b;
+                    padding:10px;
+                    border-radius:6px;
+                    margin-bottom:8px;
+                ">
+                {gap}
+                </div>
+                """, unsafe_allow_html=True)
+
         else:
             st.success("Your resume already covers required skills.")
 
@@ -287,10 +311,26 @@ def show_resume_analyzer():
         rec = summary.get("recommended_roles", [])
 
         if rec:
+
             for role in rec:
-                st.markdown(f"• **{role.replace('_',' ').title()}**")
+
+                role_name = role.replace("_", " ").title()
+
+                st.markdown(f"""
+                <div style="
+                    background:#111827;
+                    padding:12px;
+                    border-radius:8px;
+                    margin-bottom:8px;
+                    border:1px solid #374151;
+                ">
+                🚀 {role_name}
+                </div>
+                """, unsafe_allow_html=True)
+
         else:
             st.info("No alternative roles detected.")
+
 
         st.markdown("<div style='height:25px'></div>", unsafe_allow_html=True)
 
