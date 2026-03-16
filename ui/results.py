@@ -5,10 +5,6 @@ def show_results():
 
     st.title("Career Results")
 
-    # =========================
-    # SAFETY CHECK
-    # =========================
-
     if "results" not in st.session_state:
         st.warning("No results available. Please take the career test first.")
         return
@@ -91,9 +87,7 @@ def show_results():
     col1, col2, col3 = st.columns(3)
 
     with col1:
-
         if st.button("🧭 View Career Roadmap"):
-
             top_match = matches[0]
             career_data = top_match.get("data")
 
@@ -176,7 +170,8 @@ def show_results():
     # SIMILAR CAREERS
     # =========================
 
-    if similar:
+    # SAFE GUARD
+    if isinstance(similar, list) and len(similar) > 0:
 
         st.subheader("Careers You May Also Like")
 
@@ -186,26 +181,34 @@ def show_results():
 
             with cols[i % 3]:
 
-                # SAFE name extraction
-                if isinstance(career, dict):
-                    name = career.get("name", "Career")
-                else:
-                    name = str(career).replace("_", " ").title()
+                try:
 
-                st.markdown(
-                    f"""
-                    <div style="
-                        padding:16px;
-                        border-radius:10px;
-                        border:1px solid #334155;
-                        background:#020617;
-                        text-align:center;
-                    ">
-                    {name}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                    if isinstance(career, dict):
+                        name = career.get("name", "Career")
+
+                    elif isinstance(career, str):
+                        name = career.replace("_", " ").title()
+
+                    else:
+                        name = "Career"
+
+                    st.markdown(
+                        f"""
+                        <div style="
+                            padding:16px;
+                            border-radius:10px;
+                            border:1px solid #334155;
+                            background:#020617;
+                            text-align:center;
+                        ">
+                        {name}
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
+
+                except Exception:
+                    pass
 
     st.markdown("---")
 
