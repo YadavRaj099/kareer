@@ -22,7 +22,7 @@ from engine.trends import get_trends
 st.set_page_config(
     page_title="Kareer",
     layout="wide",
-    page_icon="🚀"
+    page_icon="🧭"
 )
 
 load_styles()
@@ -37,6 +37,7 @@ if "page" not in st.session_state:
 
 
 def go(page_name: str):
+    """Navigate between pages."""
     st.session_state.page = page_name
     st.rerun()
 
@@ -45,31 +46,33 @@ def go(page_name: str):
 # 4️⃣ NAVBAR
 # =====================================================
 
-nav1, nav2, nav3, nav4, nav5, nav6 = st.columns([4,1.2,1.2,1.2,1.2,1.4])
+nav_brand, nav_home, nav_finder, nav_insights, nav_explorer, nav_resume = st.columns(
+    [4, 1.2, 1.2, 1.2, 1.2, 1.4]
+)
 
-with nav1:
+with nav_brand:
     st.markdown(
         '<div class="brand-title">Kareer</div>',
         unsafe_allow_html=True
     )
 
-with nav2:
+with nav_home:
     if st.button("Home", use_container_width=True):
         go("home")
 
-with nav3:
+with nav_finder:
     if st.button("Path Finder", use_container_width=True):
         go("career_test")
 
-with nav4:
+with nav_insights:
     if st.button("Insights", use_container_width=True):
         go("insights")
 
-with nav5:
+with nav_explorer:
     if st.button("Explorer", use_container_width=True):
         go("explorer")
 
-with nav6:
+with nav_resume:
     if st.button("Resume AI", use_container_width=True):
         go("resume_analyzer")
 
@@ -88,8 +91,8 @@ ticker_html = """
 <div class="ticker-move">
 """
 
-for t in trends:
-    ticker_html += f'<span class="ticker-item">🔥 {t}</span>'
+for trend in trends:
+    ticker_html += f'<span class="ticker-item">{trend}</span>'
 
 ticker_html += """
 </div>
@@ -103,7 +106,7 @@ st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
 
 
 # =====================================================
-# 6️⃣ PAGE ROUTER
+# 6️⃣ ROUTER
 # =====================================================
 
 page = st.session_state.page
@@ -123,12 +126,12 @@ if page == "home":
 
     st.markdown(
         '<div class="hero-subtitle">'
-        'AI-powered career intelligence that helps students discover the right career path, skills, and roadmap.'
+        'AI-powered career intelligence helping students discover the right career path, required skills, and learning roadmap.'
         '</div>',
         unsafe_allow_html=True
     )
 
-    if st.button("🚀 Start Career Test", use_container_width=True):
+    if st.button("Start Career Test", use_container_width=True):
         go("career_test")
 
     st.markdown("<div class='section-space'></div>", unsafe_allow_html=True)
@@ -147,10 +150,10 @@ if page == "home":
         <p>Upload your resume and instantly discover:</p>
 
         <ul style="list-style:none;padding:0;margin-top:10px;color:#94a3b8">
-        <li>• Career readiness score</li>
-        <li>• Skills you are missing</li>
-        <li>• Interview probability</li>
-        <li>• Personalized roadmap</li>
+        <li>Career readiness score</li>
+        <li>Skills you are missing</li>
+        <li>Interview probability</li>
+        <li>Personalized learning roadmap</li>
         </ul>
 
         </div>
@@ -168,10 +171,10 @@ if page == "home":
     # FEATURE CARDS
     # =================================================
 
-    c1, c2 = st.columns(2)
-    c3, c4 = st.columns(2)
+    col1, col2 = st.columns(2)
+    col3, col4 = st.columns(2)
 
-    with c1:
+    with col1:
 
         st.markdown(
             """
@@ -191,7 +194,7 @@ if page == "home":
         if st.button("Open Career Path Finder", use_container_width=True):
             go("career_test")
 
-    with c2:
+    with col2:
 
         st.markdown(
             """
@@ -210,7 +213,7 @@ if page == "home":
         if st.button("Open Career Explorer", use_container_width=True):
             go("explorer")
 
-    with c3:
+    with col3:
 
         st.markdown(
             """
@@ -228,7 +231,7 @@ if page == "home":
         if st.button("Open Job Insights", use_container_width=True):
             go("insights")
 
-    with c4:
+    with col4:
 
         st.markdown(
             """
