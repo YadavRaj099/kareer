@@ -11,7 +11,10 @@ from functools import lru_cache
 # DATABASE LOCATION
 # =====================================================
 
-ROLE_DB_PATH = "data/roles_database.json"
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+ROLE_DB_PATH = BASE_DIR / "data" / "roles_database.json"
 
 
 # =====================================================
