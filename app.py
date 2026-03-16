@@ -37,7 +37,6 @@ if "page" not in st.session_state:
 
 
 def go(page_name: str):
-    """Navigate between pages."""
     st.session_state.page = page_name
     st.rerun()
 
@@ -46,13 +45,21 @@ def go(page_name: str):
 # 4️⃣ NAVBAR
 # =====================================================
 
-nav_brand, nav_home, nav_finder, nav_insights, nav_explorer, nav_resume = st.columns(
-    [4, 1.2, 1.2, 1.2, 1.2, 1.4]
+nav_brand, nav_home, nav_resume, nav_finder, nav_explorer, nav_insights = st.columns(
+    [5, 1.2, 1.5, 1.4, 1.4, 1.4]
 )
 
 with nav_brand:
     st.markdown(
-        '<div class="brand-title">Kareer</div>',
+        """
+        <div style="
+            font-size:32px;
+            font-weight:800;
+            letter-spacing:-0.5px;
+        ">
+        Kareer
+        </div>
+        """,
         unsafe_allow_html=True
     )
 
@@ -60,21 +67,21 @@ with nav_home:
     if st.button("Home", use_container_width=True):
         go("home")
 
+with nav_resume:
+    if st.button("Resume AI", use_container_width=True):
+        go("resume_analyzer")
+
 with nav_finder:
     if st.button("Path Finder", use_container_width=True):
         go("career_test")
-
-with nav_insights:
-    if st.button("Insights", use_container_width=True):
-        go("insights")
 
 with nav_explorer:
     if st.button("Explorer", use_container_width=True):
         go("explorer")
 
-with nav_resume:
-    if st.button("Resume AI", use_container_width=True):
-        go("resume_analyzer")
+with nav_insights:
+    if st.button("Insights", use_container_width=True):
+        go("insights")
 
 st.markdown("<div class='nav-spacing'></div>", unsafe_allow_html=True)
 
@@ -120,25 +127,21 @@ if page == "home":
 
     # HERO
     st.markdown(
-        '<div class="hero-title">Discover the career path that actually fits you.</div>',
+        '<div class="hero-title">AI Career Intelligence for Students</div>',
         unsafe_allow_html=True
     )
 
     st.markdown(
         '<div class="hero-subtitle">'
-        'AI-powered career intelligence helping students discover the right career path, required skills, and learning roadmap.'
+        'Analyze your resume, discover missing skills, and find the career path that fits you.'
         '</div>',
         unsafe_allow_html=True
     )
 
-    if st.button("Start Career Test", use_container_width=True):
-        go("career_test")
-
     st.markdown("<div class='section-space'></div>", unsafe_allow_html=True)
 
-
     # =================================================
-    # AI RESUME ANALYZER HERO
+    # MAIN PRODUCT
     # =================================================
 
     st.markdown(
@@ -166,6 +169,19 @@ if page == "home":
 
     st.markdown("<div class='section-space'></div>", unsafe_allow_html=True)
 
+    # =================================================
+    # SECONDARY FEATURE
+    # =================================================
+
+    st.markdown(
+        '<div class="section-title">Discover Your Ideal Career</div>',
+        unsafe_allow_html=True
+    )
+
+    if st.button("Take Career Path Test", use_container_width=True):
+        go("career_test")
+
+    st.markdown("<div class='section-space'></div>", unsafe_allow_html=True)
 
     # =================================================
     # FEATURE CARDS
@@ -182,10 +198,8 @@ if page == "home":
                 <div class="feature-icon">🎯</div>
                 <div class="feature-title">Career Path Finder</div>
                 <div class="feature-desc">
-                    Answer targeted questions and get your best career match.
+                    Discover careers that match your personality and skills.
                 </div>
-                <span class="mini-tag">Best Match</span>
-                <span class="mini-tag">Alternatives</span>
             </div>
             """,
             unsafe_allow_html=True
@@ -202,9 +216,8 @@ if page == "home":
                 <div class="feature-icon">📚</div>
                 <div class="feature-title">Career Explorer</div>
                 <div class="feature-desc">
-                    Explore careers and what they require.
+                    Explore career requirements, skills and growth paths.
                 </div>
-                <span class="mini-tag">Explore</span>
             </div>
             """,
             unsafe_allow_html=True
@@ -221,7 +234,7 @@ if page == "home":
                 <div class="feature-icon">📊</div>
                 <div class="feature-title">Job Demand Insights</div>
                 <div class="feature-desc">
-                    Discover which careers are growing and what they pay.
+                    Discover which careers are growing and their salary trends.
                 </div>
             </div>
             """,
@@ -239,7 +252,7 @@ if page == "home":
                 <div class="feature-icon">🧠</div>
                 <div class="feature-title">Skill Gap Analyzer</div>
                 <div class="feature-desc">
-                    Analyze your resume and find missing skills.
+                    Identify missing skills for your dream job.
                 </div>
             </div>
             """,
