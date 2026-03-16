@@ -1,91 +1,201 @@
 {
   "data_scientist": {
-    "required": [
-      "python",
-      "pandas",
-      "numpy",
-      "machine learning",
-      "statistics",
-      "sql"
-    ],
-    "optional": [
-      "tensorflow",
-      "pytorch",
-      "deep learning",
-      "tableau"
-    ],
-    "tools": [
-      "jupyter",
-      "git",
-      "docker"
-    ],
-    "soft_skills": [
-      "communication",
-      "problem solving",
-      "critical thinking"
-    ],
-    "experience_keywords": [
-      "data analysis",
-      "predictive modeling",
-      "feature engineering"
-    ]
-  },
-
-  "backend_developer": {
-    "required": [
-      "python",
-      "api",
-      "sql",
-      "django"
-    ],
-    "optional": [
-      "docker",
-      "aws",
-      "redis"
-    ],
-    "tools": [
-      "git",
-      "docker",
-      "linux"
-    ],
-    "soft_skills": [
-      "debugging",
-      "system design",
-      "problem solving"
-    ],
-    "experience_keywords": [
-      "backend",
-      "rest api",
-      "microservices"
-    ]
+    "required": ["python","pandas","numpy","machine learning","statistics","sql"],
+    "optional": ["tensorflow","pytorch","deep learning","tableau"],
+    "tools": ["jupyter","git","docker"],
+    "soft_skills": ["communication","problem solving","critical thinking"],
+    "experience_keywords": ["data analysis","predictive modeling","feature engineering"]
   },
 
   "data_analyst": {
-    "required": [
-      "excel",
-      "sql",
-      "python",
-      "pandas"
-    ],
-    "optional": [
-      "tableau",
-      "power bi",
-      "statistics"
-    ],
-    "tools": [
-      "excel",
-      "tableau",
-      "power bi"
-    ],
-    "soft_skills": [
-      "communication",
-      "analysis",
-      "presentation"
-    ],
-    "experience_keywords": [
-      "data visualization",
-      "dashboard",
-      "reporting"
-    ]
+    "required": ["excel","sql","python","pandas"],
+    "optional": ["tableau","power bi","statistics"],
+    "tools": ["excel","tableau","power bi"],
+    "soft_skills": ["communication","analysis","presentation"],
+    "experience_keywords": ["data visualization","dashboard","reporting"]
+  },
+
+  "data_engineer": {
+    "required": ["python","sql","etl","data pipelines"],
+    "optional": ["spark","airflow","hadoop"],
+    "tools": ["docker","git","aws"],
+    "soft_skills": ["problem solving","system thinking"],
+    "experience_keywords": ["data warehouse","pipeline development"]
+  },
+
+  "machine_learning_engineer": {
+    "required": ["python","machine learning","statistics","model deployment"],
+    "optional": ["tensorflow","pytorch","mlops"],
+    "tools": ["docker","kubernetes","git"],
+    "soft_skills": ["experimentation","problem solving"],
+    "experience_keywords": ["model training","model optimization"]
+  },
+
+  "ai_engineer": {
+    "required": ["python","machine learning","deep learning","neural networks"],
+    "optional": ["pytorch","tensorflow","nlp"],
+    "tools": ["docker","git","cloud"],
+    "soft_skills": ["problem solving","research"],
+    "experience_keywords": ["ai models","model training"]
+  },
+
+  "backend_developer": {
+    "required": ["python","api","sql","django"],
+    "optional": ["docker","aws","redis"],
+    "tools": ["git","docker","linux"],
+    "soft_skills": ["debugging","system design","problem solving"],
+    "experience_keywords": ["backend","rest api","microservices"]
+  },
+
+  "frontend_developer": {
+    "required": ["html","css","javascript","react"],
+    "optional": ["typescript","nextjs","redux"],
+    "tools": ["git","npm","webpack"],
+    "soft_skills": ["creativity","communication"],
+    "experience_keywords": ["ui development","web applications"]
+  },
+
+  "full_stack_developer": {
+    "required": ["javascript","react","nodejs","sql"],
+    "optional": ["docker","aws","graphql"],
+    "tools": ["git","docker","linux"],
+    "soft_skills": ["problem solving","teamwork"],
+    "experience_keywords": ["web development","backend services"]
+  },
+
+  "software_engineer": {
+    "required": ["programming","algorithms","data structures"],
+    "optional": ["system design","cloud"],
+    "tools": ["git","linux","docker"],
+    "soft_skills": ["problem solving","teamwork"],
+    "experience_keywords": ["software development"]
+  },
+
+  "devops_engineer": {
+    "required": ["linux","docker","ci/cd","cloud"],
+    "optional": ["kubernetes","terraform"],
+    "tools": ["jenkins","docker","aws"],
+    "soft_skills": ["automation","problem solving"],
+    "experience_keywords": ["infrastructure","deployment pipelines"]
+  },
+
+  "cloud_engineer": {
+    "required": ["cloud","linux","networking"],
+    "optional": ["aws","azure","gcp"],
+    "tools": ["docker","terraform","aws"],
+    "soft_skills": ["problem solving","architecture thinking"],
+    "experience_keywords": ["cloud infrastructure"]
+  },
+
+  "mobile_app_developer": {
+    "required": ["mobile development","java","kotlin"],
+    "optional": ["flutter","react native"],
+    "tools": ["android studio","git"],
+    "soft_skills": ["problem solving","design thinking"],
+    "experience_keywords": ["mobile apps"]
+  },
+
+  "cybersecurity_analyst": {
+    "required": ["network security","security analysis","linux"],
+    "optional": ["penetration testing","cryptography"],
+    "tools": ["wireshark","metasploit"],
+    "soft_skills": ["attention to detail","analysis"],
+    "experience_keywords": ["security monitoring"]
+  },
+
+  "database_administrator": {
+    "required": ["sql","database management","backup"],
+    "optional": ["oracle","postgresql"],
+    "tools": ["mysql","postgresql"],
+    "soft_skills": ["analysis","problem solving"],
+    "experience_keywords": ["database maintenance"]
+  },
+
+  "network_engineer": {
+    "required": ["networking","routing","switching"],
+    "optional": ["cisco","network security"],
+    "tools": ["wireshark","cisco tools"],
+    "soft_skills": ["problem solving","analysis"],
+    "experience_keywords": ["network configuration"]
+  },
+
+  "ui_designer": {
+    "required": ["ui design","design principles","figma"],
+    "optional": ["adobe xd","sketch"],
+    "tools": ["figma","adobe xd"],
+    "soft_skills": ["creativity","communication"],
+    "experience_keywords": ["interface design"]
+  },
+
+  "ux_designer": {
+    "required": ["ux research","wireframing","prototyping"],
+    "optional": ["figma","usability testing"],
+    "tools": ["figma","sketch"],
+    "soft_skills": ["empathy","communication"],
+    "experience_keywords": ["user experience"]
+  },
+
+  "graphic_designer": {
+    "required": ["design","typography","branding"],
+    "optional": ["illustration"],
+    "tools": ["photoshop","illustrator"],
+    "soft_skills": ["creativity","communication"],
+    "experience_keywords": ["visual design"]
+  },
+
+  "product_manager": {
+    "required": ["product strategy","market research","communication"],
+    "optional": ["analytics","roadmapping"],
+    "tools": ["jira","notion"],
+    "soft_skills": ["leadership","decision making"],
+    "experience_keywords": ["product roadmap"]
+  },
+
+  "project_manager": {
+    "required": ["project planning","communication","risk management"],
+    "optional": ["agile","scrum"],
+    "tools": ["jira","asana"],
+    "soft_skills": ["leadership","organization"],
+    "experience_keywords": ["project delivery"]
+  },
+
+  "business_analyst": {
+    "required": ["analysis","documentation","stakeholder communication"],
+    "optional": ["sql","excel"],
+    "tools": ["excel","powerpoint"],
+    "soft_skills": ["communication","analysis"],
+    "experience_keywords": ["business requirements"]
+  },
+
+  "seo_specialist": {
+    "required": ["seo","keyword research","analytics"],
+    "optional": ["content strategy"],
+    "tools": ["google analytics","ahrefs"],
+    "soft_skills": ["analysis","communication"],
+    "experience_keywords": ["search ranking"]
+  },
+
+  "digital_marketer": {
+    "required": ["digital marketing","content marketing","analytics"],
+    "optional": ["seo","social media"],
+    "tools": ["google analytics","ads manager"],
+    "soft_skills": ["communication","creativity"],
+    "experience_keywords": ["campaign management"]
+  },
+
+  "financial_analyst": {
+    "required": ["finance","financial modeling","excel"],
+    "optional": ["sql","python"],
+    "tools": ["excel","power bi"],
+    "soft_skills": ["analysis","communication"],
+    "experience_keywords": ["financial forecasting"]
+  },
+
+  "sales_manager": {
+    "required": ["sales","customer relationship","negotiation"],
+    "optional": ["crm","analytics"],
+    "tools": ["salesforce","hubspot"],
+    "soft_skills": ["communication","leadership"],
+    "experience_keywords": ["sales strategy"]
   }
 }
