@@ -34,7 +34,9 @@ def analyze_resume(uploaded_file, target_role):
 
         "career_recommendations": [],
 
-        "analysis_metrics": {}
+        "analysis_metrics": {},
+
+        "skill_categories": {}
 
     }
 
@@ -69,7 +71,8 @@ def analyze_resume(uploaded_file, target_role):
             analysis["score"] = {
                 "score": 0,
                 "readiness": "Unknown Role",
-                "interview_probability": "Unknown"
+                "interview_probability": "Unknown",
+                "missing_skills": []
             }
 
         else:
@@ -91,7 +94,15 @@ def analyze_resume(uploaded_file, target_role):
 
 
         # ------------------------------------------------
-        # STEP 6 — ANALYTICS
+        # STEP 6 — SKILL CATEGORY ANALYSIS
+        # Used for radar charts
+        # ------------------------------------------------
+
+        analysis["skill_categories"] = categorize_skills(extracted_skills)
+
+
+        # ------------------------------------------------
+        # STEP 7 — ANALYTICS
         # ------------------------------------------------
 
         analysis["analysis_metrics"] = generate_metrics(
@@ -136,6 +147,40 @@ def recommend_roles(extracted_skills, top_n=5):
     ranking.sort(key=lambda x: x[1], reverse=True)
 
     return [r[0] for r in ranking[:top_n]]
+
+
+# =====================================================
+# SKILL CATEGORY ANALYSIS
+# Used for radar chart visualization
+# =====================================================
+
+def categorize_skills(extracted_skills):
+
+    skills = set(extracted_skills.get("skills", []))
+
+    categories = {
+
+        "Data": {"sql", "pandas", "numpy", "excel", "tableau"},
+
+        "AI": {"machine learning", "tensorflow", "pytorch", "nlp"},
+
+        "Backend": {"python", "java", "node", "django", "flask"},
+
+        "Web": {"html", "css", "javascript", "react"},
+
+        "DevOps": {"docker", "kubernetes", "aws", "ci/cd"}
+
+    }
+
+    category_scores = {}
+
+    for cat, cat_skills in categories.items():
+
+        match = len(skills.intersection(cat_skills))
+
+        category_scores[cat] = min(match * 25, 100)
+
+    return category_scores
 
 
 # =====================================================
@@ -203,6 +248,11 @@ def generate_summary(analysis):
         "recommended_roles": analysis.get(
             "career_recommendations",
             []
+        ),
+
+        "skill_categories": analysis.get(
+            "skill_categories",
+            {}
         )
     }
 
