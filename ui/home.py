@@ -11,9 +11,9 @@ def show_home(go):
     ========================= */
 
     .hero-title{
-        font-size:52px;
+        font-size:54px;
         font-weight:800;
-        line-height:1.1;
+        line-height:1.15;
         margin-top:40px;
         text-align:center;
         letter-spacing:-0.5px;
@@ -22,34 +22,39 @@ def show_home(go):
     .hero-sub{
         font-size:18px;
         color:#94a3b8;
-        margin-top:14px;
-        margin-bottom:40px;
+        margin-top:16px;
+        margin-bottom:28px;
         text-align:center;
         max-width:720px;
         margin-left:auto;
         margin-right:auto;
     }
 
+    .hero-trust{
+        text-align:center;
+        color:#94a3b8;
+        font-size:13px;
+        margin-top:12px;
+    }
 
     /* =========================
        SECTION TITLES
     ========================= */
 
     .section-title{
-        font-size:28px;
+        font-size:30px;
         font-weight:700;
-        margin-top:60px;
-        margin-bottom:26px;
+        margin-top:70px;
+        margin-bottom:28px;
         text-align:center;
     }
-
 
     /* =========================
        GLASS CARD
     ========================= */
 
     .glass-card{
-        border-radius:18px;
+        border-radius:20px;
         padding:28px;
 
         background: rgba(30,41,59,0.45);
@@ -66,13 +71,12 @@ def show_home(go):
         border:1px solid rgba(20,184,166,0.6);
     }
 
-
     /* =========================
        FEATURE CARD CONTENT
     ========================= */
 
     .feature-icon{
-        font-size:26px;
+        font-size:28px;
         margin-bottom:10px;
     }
 
@@ -88,13 +92,12 @@ def show_home(go):
         margin-bottom:16px;
     }
 
-
     /* =========================
        AI BOX
     ========================= */
 
     .ai-box{
-        border-radius:22px;
+        border-radius:24px;
         padding:36px;
 
         background: rgba(30,41,59,0.45);
@@ -132,19 +135,27 @@ def show_home(go):
     )
 
     st.markdown(
-        '<div class="hero-sub">AI-powered career intelligence that helps students discover the right career path, required skills, and learning roadmap.</div>',
+        '<div class="hero-sub">AI-powered career intelligence that analyzes your resume, reveals missing skills, and helps you find the career you are closest to.</div>',
         unsafe_allow_html=True
     )
 
     c1, c2, c3 = st.columns([1,2,1])
 
     with c2:
-        if st.button("Start Career Test", use_container_width=True):
+
+        if st.button("Analyze My Resume", use_container_width=True):
+            go("resume_analyzer")
+
+        if st.button("Take Career Test", use_container_width=True):
             go("career_test")
 
+    st.markdown(
+        '<div class="hero-trust">No signup required • Instant analysis • Free to use</div>',
+        unsafe_allow_html=True
+    )
 
     # =================================================
-    # AI RESUME ANALYZER
+    # RESUME ANALYZER FEATURE
     # =================================================
 
     st.markdown(
@@ -159,9 +170,9 @@ def show_home(go):
 
     <ul>
     <li>Career readiness score</li>
-    <li>Missing skills for your target role</li>
+    <li>Skills you are missing</li>
     <li>Interview probability</li>
-    <li>Personalized learning roadmap</li>
+    <li>Career paths you are closest to</li>
     </ul>
 
     </div>
@@ -173,9 +184,8 @@ def show_home(go):
         if st.button("Analyze Resume", use_container_width=True):
             go("resume_analyzer")
 
-
     # =================================================
-    # FEATURES
+    # TOOLS SECTION
     # =================================================
 
     st.markdown(
@@ -197,7 +207,7 @@ def show_home(go):
         </div>
 
         <div class="feature-desc">
-        Answer targeted questions and discover the careers that match your skills, interests, and personality.
+        Answer targeted questions and discover careers that match your skills, interests, and personality.
         </div>
 
         </div>
@@ -265,7 +275,7 @@ def show_home(go):
         </div>
 
         <div class="feature-desc">
-        Analyze your resume and discover the skills required for your dream job.
+        Analyze your resume and discover the skills required for your target career.
         </div>
 
         </div>
