@@ -18,7 +18,6 @@ def show_resume_analyzer():
         st.code(str(e))
         return
 
-
     # ==================================================
     # HERO
     # ==================================================
@@ -59,7 +58,6 @@ def show_resume_analyzer():
 
     st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 
-
     # ==================================================
     # ROLE SELECTION
     # ==================================================
@@ -78,7 +76,6 @@ def show_resume_analyzer():
 
     analyze = st.button("Analyze Resume", use_container_width=True)
 
-
     # ==================================================
     # START ANALYSIS
     # ==================================================
@@ -88,7 +85,6 @@ def show_resume_analyzer():
         if not uploaded_file:
             st.warning("Please upload a resume first.")
             return
-
 
         # ==================================================
         # LOADING SIMULATION
@@ -114,27 +110,21 @@ def show_resume_analyzer():
         status.empty()
         progress_bar.empty()
 
-
         # ==================================================
         # RUN ANALYSIS
         # ==================================================
 
         try:
-
             analysis = analyze_resume(uploaded_file, target_role)
             summary = generate_summary(analysis)
-
         except Exception as e:
-
             st.error("Error analyzing resume.")
             st.code(str(e))
             return
 
-
         st.success("Analysis completed")
 
         st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
-
 
         # ==================================================
         # SCORE PANEL
@@ -147,30 +137,17 @@ def show_resume_analyzer():
         score = summary.get("resume_score", 0)
 
         col1.metric("Resume Score", f"{score}%")
-
-        col2.metric(
-            "Readiness",
-            summary.get("readiness", "Unknown")
-        )
-
-        col3.metric(
-            "Interview Probability",
-            summary.get("interview_probability", "Unknown")
-        )
-
-        # Resume strength feedback
+        col2.metric("Readiness", summary.get("readiness", "Unknown"))
+        col3.metric("Interview Probability", summary.get("interview_probability", "Unknown"))
 
         if score < 40:
             st.warning("Your resume needs improvement for this role.")
-
         elif score < 70:
             st.info("Your resume is partially aligned with this role.")
-
         else:
             st.success("Your resume is well aligned with this role.")
 
         st.markdown("---")
-
 
         # ==================================================
         # SKILL INTELLIGENCE RADAR
@@ -198,14 +175,13 @@ def show_resume_analyzer():
 
             fig.update_layout(
                 template="plotly_dark",
-                height=500,
+                height=520,
                 margin=dict(l=30, r=30, t=30, b=30)
             )
 
             st.plotly_chart(fig, use_container_width=True)
 
             st.markdown("---")
-
 
         # ==================================================
         # RESUME METRICS
@@ -219,56 +195,47 @@ def show_resume_analyzer():
 
             m1, m2, m3 = st.columns(3)
 
-            m1.metric(
-                "Resume Length",
-                f"{metrics.get('resume_length_words',0)} words"
-            )
-
-            m2.metric(
-                "Skills Detected",
-                metrics.get("skills_detected",0)
-            )
-
-            m3.metric(
-                "Skill Density",
-                f"{metrics.get('skill_density_percent',0)}%"
-            )
+            m1.metric("Resume Length", f"{metrics.get('resume_length_words',0)} words")
+            m2.metric("Skills Detected", metrics.get("skills_detected",0))
+            m3.metric("Skill Density", f"{metrics.get('skill_density_percent',0)}%")
 
             st.markdown("---")
 
-
         # ==================================================
-# DETECTED SKILLS
-# ==================================================
+        # DETECTED SKILLS
+        # ==================================================
 
-st.subheader("🧠 Detected Skills")
+        st.subheader("🧠 Detected Skills")
 
-skills = analysis.get("skills", {}).get("skills", [])
+        skills = analysis.get("skills", {}).get("skills", [])
 
-if skills:
+        if skills:
 
-    cols = st.columns(4)
+            cols = st.columns(4)
 
-    for i, skill in enumerate(skills):
-        cols[i % 4].markdown(
-            f"""
-            <div style="
-                padding:8px 12px;
-                border-radius:999px;
-                border:1px solid #334155;
-                font-size:13px;
-                background:#020617;
-                text-align:center;
-                margin-bottom:8px;
-            ">
-            {skill}
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+            for i, skill in enumerate(skills):
 
-else:
-    st.info("No skills detected in resume.")
+                cols[i % 4].markdown(
+                    f"""
+                    <div style="
+                        padding:8px 12px;
+                        border-radius:999px;
+                        border:1px solid #334155;
+                        font-size:13px;
+                        background:#020617;
+                        text-align:center;
+                        margin-bottom:8px;
+                    ">
+                    {skill}
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+        else:
+            st.info("No skills detected in resume.")
+
+        st.markdown("---")
 
         # ==================================================
         # SKILL GAPS
@@ -282,23 +249,25 @@ else:
 
             for gap in gaps:
 
-                st.markdown(f"""
-                <div style="
-                    background:#1f2937;
-                    border-left:4px solid #f59e0b;
-                    padding:10px;
-                    border-radius:6px;
-                    margin-bottom:8px;
-                ">
-                {gap}
-                </div>
-                """, unsafe_allow_html=True)
+                st.markdown(
+                    f"""
+                    <div style="
+                        background:#1f2937;
+                        border-left:4px solid #f59e0b;
+                        padding:10px;
+                        border-radius:6px;
+                        margin-bottom:8px;
+                    ">
+                    {gap}
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
 
         else:
             st.success("Your resume already covers required skills.")
 
         st.markdown("---")
-
 
         # ==================================================
         # RECOMMENDED CAREERS
@@ -314,21 +283,23 @@ else:
 
                 role_name = role.replace("_", " ").title()
 
-                st.markdown(f"""
-                <div style="
-                    background:#111827;
-                    padding:12px;
-                    border-radius:8px;
-                    margin-bottom:8px;
-                    border:1px solid #374151;
-                ">
-                🚀 {role_name}
-                </div>
-                """, unsafe_allow_html=True)
+                st.markdown(
+                    f"""
+                    <div style="
+                        background:#111827;
+                        padding:12px;
+                        border-radius:8px;
+                        margin-bottom:8px;
+                        border:1px solid #374151;
+                    ">
+                    🚀 {role_name}
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
 
         else:
             st.info("No alternative roles detected.")
-
 
         st.markdown("<div style='height:25px'></div>", unsafe_allow_html=True)
 
