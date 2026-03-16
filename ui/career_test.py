@@ -62,7 +62,7 @@ def show_career_test():
 
     st.markdown(
         f"""
-        <div style="font-size:22px;font-weight:600;margin-bottom:20px;">
+        <div style="font-size:22px;font-weight:600;margin-bottom:25px;">
         {q["question"]}
         </div>
         """,
@@ -70,28 +70,27 @@ def show_career_test():
     )
 
     # -----------------------------
-    # SINGLE SELECT (MCQ STYLE)
+    # SINGLE SELECT
     # -----------------------------
 
     if q["type"] == "single":
 
         selected = st.session_state.answers.get(key)
 
-        for i, option in enumerate(q["options"]):
+        for i, (label, value) in enumerate(q["options"].items()):
 
-            is_selected = selected == option
+            is_selected = selected == value
 
-            button_label = option
-
+            btn_text = label
             if is_selected:
-                button_label = f"✅ {option}"
+                btn_text = f"✅ {label}"
 
             if st.button(
-                button_label,
+                btn_text,
                 use_container_width=True,
                 key=f"{key}_{i}"
             ):
-                st.session_state.answers[key] = option
+                st.session_state.answers[key] = value
                 st.rerun()
 
     # -----------------------------
@@ -100,13 +99,24 @@ def show_career_test():
 
     elif q["type"] == "multi":
 
-        answer = st.multiselect(
+        option_labels = list(q["options"].keys())
+        option_values = list(q["options"].values())
+
+        reverse_map = dict(zip(option_labels, option_values))
+
+        selected_labels = st.multiselect(
             "",
-            q["options"],
-            default=st.session_state.answers.get(key, [])
+            option_labels,
+            default=[
+                label
+                for label, value in q["options"].items()
+                if value in st.session_state.answers.get(key, [])
+            ]
         )
 
-        st.session_state.answers[key] = answer
+        st.session_state.answers[key] = [
+            reverse_map[label] for label in selected_labels
+        ]
 
     # -----------------------------
     # OPTIONAL NOTES
@@ -143,16 +153,26 @@ def show_career_test():
 
     with col3:
 
+        # Require answer before moving forward
+        answered = key in st.session_state.answers and st.session_state.answers[key]
+
         if step < total - 1:
 
             if st.button("Next ➡", use_container_width=True):
 
-                st.session_state.step += 1
-                st.rerun()
+                if not answered:
+                    st.warning("Please select an option before continuing.")
+                else:
+                    st.session_state.step += 1
+                    st.rerun()
 
         else:
 
             if st.button("Show My Career Path 🚀", use_container_width=True):
+
+                if not answered:
+                    st.warning("Please answer the final question.")
+                    return
 
                 user_answers = {}
 
