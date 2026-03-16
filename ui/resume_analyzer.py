@@ -59,23 +59,49 @@ def show_resume_analyzer():
     st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 
     # ==================================================
-    # ROLE SELECTION
-    # ==================================================
+# ROLE SELECTION
+# ==================================================
 
-    roles = list_available_roles()
+roles = list_available_roles()
 
-    if not roles:
-        st.warning("No roles available in the career database.")
-        return
+if not roles:
+    st.warning("No roles available in the career database.")
+    return
 
-    target_role = st.selectbox(
-        "🎯 Target Career",
-        roles,
-        format_func=lambda x: x.replace("_", " ").title()
-    )
 
-    analyze = st.button("Analyze Resume", use_container_width=True)
+st.markdown("### 🎯 Target Career")
 
+search_query = st.text_input(
+    "Search career role",
+    placeholder="Try: Data Scientist, Backend Developer, UI Designer..."
+)
+
+# Filter roles based on search
+filtered_roles = roles
+
+if search_query:
+    filtered_roles = [
+        role for role in roles
+        if search_query.lower() in role.replace("_", " ").lower()
+    ]
+
+# Handle no match case
+if not filtered_roles:
+    st.warning("No roles match your search.")
+    filtered_roles = roles
+
+
+target_role = st.selectbox(
+    "Select role",
+    filtered_roles,
+    format_func=lambda x: x.replace("_", " ").title()
+)
+
+
+analyze = st.button(
+    "Analyze Resume",
+    use_container_width=True
+)
     # ==================================================
     # START ANALYSIS
     # ==================================================
