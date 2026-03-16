@@ -1,7 +1,7 @@
 import streamlit as st
 
 
-def show_home(go):
+def show_home(go home page updated ):
 
     st.markdown("""
     <style>
