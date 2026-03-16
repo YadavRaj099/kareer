@@ -5,286 +5,480 @@
 "id":"ai_engineer",
 "name":"AI Engineer",
 "category":"technology",
-"description":"Builds artificial intelligence systems and machine learning models used in automation, prediction and intelligent software.",
+"description":"Builds artificial intelligence systems and machine learning models.",
 "subjects":["math","computer_science","physics"],
-"skills":["programming","logical_thinking","problem_solving","data_analysis"],
-"work_style":["analytical","technical","research"],
+"skills":["programming","machine_learning","data_analysis"],
+"work_style":["analytical","technical"],
+"tags":["technology","ai","programming","math","analytical"],
 "risk_level":"medium",
 "salary_level":"high",
 "education_years":4,
-"future_demand":"very_high",
-"roadmap":[
-"Complete 10+2 with Physics Chemistry Mathematics",
-"Prepare for engineering entrance exams",
-"Pursue B.Tech in Computer Science or Artificial Intelligence",
-"Learn Python programming and data structures",
-"Study machine learning and deep learning",
-"Work on AI projects and internships",
-"Apply for AI Engineer or ML Engineer roles"
-],
-"similar_careers":["data_scientist","ml_engineer","robotics_engineer"]
+"future_demand":"very_high"
 },
 
 {
 "id":"software_engineer",
 "name":"Software Engineer",
 "category":"technology",
-"description":"Designs and builds software systems including applications, platforms and digital infrastructure.",
+"description":"Designs and develops software applications.",
 "subjects":["math","computer_science"],
-"skills":["programming","problem_solving","system_design","debugging"],
-"work_style":["technical","analytical"],
+"skills":["programming","system_design","debugging"],
+"work_style":["technical"],
+"tags":["technology","programming","software","engineering"],
 "risk_level":"low",
 "salary_level":"high",
 "education_years":4,
-"future_demand":"very_high",
-"roadmap":[
-"Complete 10+2 with science or mathematics",
-"Pursue B.Tech or BCA in Computer Science",
-"Learn programming languages like Python Java C++",
-"Study data structures and algorithms",
-"Build real world software projects",
-"Work as software developer or engineer"
-],
-"similar_careers":["ai_engineer","cloud_engineer","cybersecurity_analyst"]
+"future_demand":"very_high"
 },
 
 {
 "id":"data_scientist",
 "name":"Data Scientist",
 "category":"technology",
-"description":"Analyzes large datasets using statistics and machine learning to generate insights and predictions.",
+"description":"Uses data analysis and machine learning to generate insights.",
 "subjects":["math","statistics","computer_science"],
-"skills":["data_analysis","statistics","programming","machine_learning"],
-"work_style":["analytical","research"],
+"skills":["statistics","machine_learning","python"],
+"work_style":["analytical"],
+"tags":["data","analytics","math","technology"],
 "risk_level":"medium",
 "salary_level":"high",
 "education_years":4,
-"future_demand":"very_high",
-"roadmap":[
-"Complete 10+2 with mathematics",
-"Pursue B.Tech Computer Science or Statistics",
-"Learn Python and data analysis tools",
-"Study machine learning and data visualization",
-"Work on data science projects",
-"Apply for data scientist roles"
-],
-"similar_careers":["ai_engineer","data_analyst","ml_engineer"]
+"future_demand":"very_high"
 },
 
 {
 "id":"cybersecurity_analyst",
 "name":"Cybersecurity Analyst",
 "category":"technology",
-"description":"Protects computer systems and networks from digital attacks, hacking and data breaches.",
-"subjects":["computer_science","math"],
-"skills":["network_security","problem_solving","risk_analysis"],
-"work_style":["technical","analytical"],
+"description":"Protects systems and networks from cyber attacks.",
+"subjects":["computer_science"],
+"skills":["network_security","analysis"],
+"work_style":["technical"],
+"tags":["security","technology","network","cyber"],
 "risk_level":"low",
 "salary_level":"high",
 "education_years":4,
-"future_demand":"very_high",
-"roadmap":[
-"Study computer science fundamentals",
-"Learn networking and operating systems",
-"Study cybersecurity tools and ethical hacking",
-"Earn security certifications",
-"Work as cybersecurity analyst"
-],
-"similar_careers":["network_engineer","software_engineer"]
+"future_demand":"very_high"
 },
 
 {
 "id":"cloud_engineer",
 "name":"Cloud Engineer",
 "category":"technology",
-"description":"Designs and manages cloud computing systems used by companies for data storage and applications.",
+"description":"Designs and manages cloud infrastructure.",
 "subjects":["computer_science"],
-"skills":["cloud_computing","programming","system_architecture"],
+"skills":["cloud","linux","automation"],
 "work_style":["technical"],
+"tags":["cloud","technology","infrastructure"],
 "risk_level":"low",
 "salary_level":"high",
 "education_years":4,
-"future_demand":"very_high",
-"roadmap":[
-"Study computer science",
-"Learn networking and operating systems",
-"Learn AWS Azure or Google Cloud",
-"Work on cloud deployment projects",
-"Apply for cloud engineering roles"
-],
-"similar_careers":["software_engineer","devops_engineer"]
+"future_demand":"very_high"
+},
+
+{
+"id":"data_analyst",
+"name":"Data Analyst",
+"category":"technology",
+"description":"Analyzes data to help businesses make decisions.",
+"subjects":["math","statistics"],
+"skills":["excel","data_analysis","visualization"],
+"work_style":["analytical"],
+"tags":["data","analytics","business","math"],
+"risk_level":"low",
+"salary_level":"medium",
+"education_years":4,
+"future_demand":"high"
+},
+
+{
+"id":"devops_engineer",
+"name":"DevOps Engineer",
+"category":"technology",
+"description":"Manages deployment pipelines and infrastructure.",
+"subjects":["computer_science"],
+"skills":["automation","linux","cloud"],
+"work_style":["technical"],
+"tags":["devops","cloud","automation","technology"],
+"risk_level":"low",
+"salary_level":"high",
+"education_years":4,
+"future_demand":"high"
+},
+
+{
+"id":"network_engineer",
+"name":"Network Engineer",
+"category":"technology",
+"description":"Designs and maintains computer networks.",
+"subjects":["computer_science"],
+"skills":["networking","security"],
+"work_style":["technical"],
+"tags":["network","technology","infrastructure"],
+"risk_level":"low",
+"salary_level":"medium",
+"education_years":4,
+"future_demand":"high"
+},
+
+{
+"id":"game_developer",
+"name":"Game Developer",
+"category":"technology",
+"description":"Develops video games for computers and consoles.",
+"subjects":["computer_science","design"],
+"skills":["programming","creativity"],
+"work_style":["creative","technical"],
+"tags":["gaming","technology","programming","creative"],
+"risk_level":"medium",
+"salary_level":"medium",
+"education_years":4,
+"future_demand":"high"
+},
+
+{
+"id":"robotics_engineer",
+"name":"Robotics Engineer",
+"category":"technology",
+"description":"Builds robots and automated systems.",
+"subjects":["math","physics","engineering"],
+"skills":["robotics","programming"],
+"work_style":["technical","research"],
+"tags":["robotics","engineering","technology"],
+"risk_level":"medium",
+"salary_level":"high",
+"education_years":4,
+"future_demand":"high"
 },
 
 {
 "id":"doctor",
 "name":"Doctor",
-"category":"medical",
-"description":"Diagnoses and treats diseases and medical conditions in patients.",
+"category":"healthcare",
+"description":"Diagnoses and treats diseases.",
 "subjects":["biology","chemistry"],
-"skills":["critical_thinking","empathy","medical_knowledge"],
-"work_style":["clinical","people_focused"],
+"skills":["medical_knowledge","critical_thinking"],
+"work_style":["clinical","people"],
+"tags":["medicine","healthcare","biology","people"],
 "risk_level":"low",
 "salary_level":"high",
 "education_years":8,
-"future_demand":"very_high",
-"roadmap":[
-"Complete 10+2 with Biology",
-"Prepare for medical entrance exam",
-"Study MBBS",
-"Complete internship",
-"Pursue specialization",
-"Work as doctor"
-],
-"similar_careers":["pharmacist","biotechnologist"]
+"future_demand":"very_high"
 },
 
 {
-"id":"lawyer",
-"name":"Lawyer",
-"category":"law",
-"description":"Represents clients in legal matters and provides legal advice.",
-"subjects":["politics","history","law"],
-"skills":["argumentation","research","communication"],
-"work_style":["analytical","people_focused"],
-"risk_level":"medium",
+"id":"nurse",
+"name":"Nurse",
+"category":"healthcare",
+"description":"Provides care and support to patients.",
+"subjects":["biology"],
+"skills":["caregiving","communication"],
+"work_style":["people"],
+"tags":["healthcare","medicine","people"],
+"risk_level":"low",
+"salary_level":"medium",
+"education_years":4,
+"future_demand":"very_high"
+},
+
+{
+"id":"pharmacist",
+"name":"Pharmacist",
+"category":"healthcare",
+"description":"Dispenses medicines and advises patients.",
+"subjects":["chemistry","biology"],
+"skills":["pharmaceutical_knowledge"],
+"work_style":["clinical"],
+"tags":["medicine","chemistry","healthcare"],
+"risk_level":"low",
 "salary_level":"high",
+"education_years":6,
+"future_demand":"high"
+},
+
+{
+"id":"psychologist",
+"name":"Psychologist",
+"category":"healthcare",
+"description":"Studies behavior and helps mental health patients.",
+"subjects":["psychology","biology"],
+"skills":["communication","analysis"],
+"work_style":["people"],
+"tags":["psychology","behavior","people"],
+"risk_level":"low",
+"salary_level":"medium",
+"education_years":6,
+"future_demand":"high"
+},
+
+{
+"id":"physiotherapist",
+"name":"Physiotherapist",
+"category":"healthcare",
+"description":"Helps patients recover mobility and physical strength.",
+"subjects":["biology"],
+"skills":["rehabilitation","caregiving"],
+"work_style":["people"],
+"tags":["healthcare","therapy","medicine"],
+"risk_level":"low",
+"salary_level":"medium",
 "education_years":5,
-"future_demand":"high",
-"roadmap":[
-"Complete 10+2",
-"Pursue LLB degree",
-"Complete legal internship",
-"Register with bar council",
-"Practice law"
-],
-"similar_careers":["judge","legal_consultant"]
+"future_demand":"high"
+},
+
+{
+"id":"biotechnologist",
+"name":"Biotechnologist",
+"category":"science",
+"description":"Uses biological systems to develop products and medicines.",
+"subjects":["biology","chemistry"],
+"skills":["research","analysis"],
+"work_style":["research"],
+"tags":["science","biology","research"],
+"risk_level":"medium",
+"salary_level":"medium",
+"education_years":5,
+"future_demand":"high"
+},
+
+{
+"id":"environmental_scientist",
+"name":"Environmental Scientist",
+"category":"science",
+"description":"Studies environmental issues and sustainability.",
+"subjects":["biology","environmental_science"],
+"skills":["research","analysis"],
+"work_style":["research","field"],
+"tags":["environment","science","sustainability"],
+"risk_level":"low",
+"salary_level":"medium",
+"education_years":4,
+"future_demand":"high"
+},
+
+{
+"id":"research_scientist",
+"name":"Research Scientist",
+"category":"science",
+"description":"Conducts scientific research to advance knowledge.",
+"subjects":["science"],
+"skills":["research","analysis"],
+"work_style":["research"],
+"tags":["science","research","analysis"],
+"risk_level":"low",
+"salary_level":"medium",
+"education_years":6,
+"future_demand":"high"
 },
 
 {
 "id":"chartered_accountant",
 "name":"Chartered Accountant",
 "category":"finance",
-"description":"Handles financial auditing, taxation and accounting for businesses.",
-"subjects":["accounting","math","economics"],
-"skills":["financial_analysis","problem_solving"],
+"description":"Manages auditing taxation and accounting.",
+"subjects":["accounting","economics"],
+"skills":["financial_analysis"],
 "work_style":["analytical"],
+"tags":["finance","accounting","business"],
 "risk_level":"low",
 "salary_level":"high",
 "education_years":5,
-"future_demand":"high",
-"roadmap":[
-"Complete 10+2 commerce",
-"Register for CA foundation",
-"Clear CA intermediate",
-"Complete articleship",
-"Clear CA final"
-],
-"similar_careers":["financial_analyst","investment_banker"]
+"future_demand":"high"
+},
+
+{
+"id":"financial_analyst",
+"name":"Financial Analyst",
+"category":"finance",
+"description":"Analyzes financial markets and investments.",
+"subjects":["economics","finance"],
+"skills":["financial_analysis","decision_making"],
+"work_style":["analytical"],
+"tags":["finance","investment","business"],
+"risk_level":"medium",
+"salary_level":"high",
+"education_years":4,
+"future_demand":"high"
 },
 
 {
 "id":"investment_banker",
 "name":"Investment Banker",
 "category":"finance",
-"description":"Helps companies raise capital and manage large financial transactions.",
-"subjects":["economics","finance","math"],
-"skills":["financial_analysis","negotiation","decision_making"],
-"work_style":["analytical","business"],
+"description":"Helps companies raise capital.",
+"subjects":["economics","finance"],
+"skills":["negotiation","financial_analysis"],
+"work_style":["business"],
+"tags":["finance","investment","business"],
 "risk_level":"high",
 "salary_level":"very_high",
 "education_years":5,
-"future_demand":"high",
-"roadmap":[
-"Study finance or economics",
-"Pursue MBA finance",
-"Work in financial institutions",
-"Become investment banker"
-],
-"similar_careers":["financial_analyst","business_consultant"]
+"future_demand":"high"
 },
 
 {
 "id":"entrepreneur",
 "name":"Entrepreneur",
 "category":"business",
-"description":"Creates and runs new businesses or startups.",
+"description":"Creates and runs startups.",
 "subjects":["business","economics"],
-"skills":["leadership","risk_taking","innovation"],
+"skills":["leadership","innovation"],
 "work_style":["business","creative"],
+"tags":["business","startup","innovation"],
 "risk_level":"very_high",
 "salary_level":"variable",
 "education_years":0,
-"future_demand":"high",
-"roadmap":[
-"Identify a market opportunity",
-"Build product or service",
-"Start business",
-"Grow company"
-],
-"similar_careers":["business_consultant","startup_founder"]
+"future_demand":"high"
+},
+
+{
+"id":"product_manager",
+"name":"Product Manager",
+"category":"business",
+"description":"Leads product development and strategy.",
+"subjects":["business","technology"],
+"skills":["leadership","strategy"],
+"work_style":["business"],
+"tags":["management","business","technology"],
+"risk_level":"medium",
+"salary_level":"high",
+"education_years":4,
+"future_demand":"high"
+},
+
+{
+"id":"marketing_manager",
+"name":"Marketing Manager",
+"category":"business",
+"description":"Plans marketing strategies for products.",
+"subjects":["business","marketing"],
+"skills":["communication","strategy"],
+"work_style":["business","creative"],
+"tags":["marketing","business","communication"],
+"risk_level":"medium",
+"salary_level":"medium",
+"education_years":4,
+"future_demand":"high"
+},
+
+{
+"id":"business_consultant",
+"name":"Business Consultant",
+"category":"business",
+"description":"Advises companies on growth strategies.",
+"subjects":["business","economics"],
+"skills":["analysis","communication"],
+"work_style":["business"],
+"tags":["consulting","business","analysis"],
+"risk_level":"medium",
+"salary_level":"high",
+"education_years":4,
+"future_demand":"high"
 },
 
 {
 "id":"ui_ux_designer",
 "name":"UI UX Designer",
 "category":"creative",
-"description":"Designs user interfaces and experiences for digital products.",
+"description":"Designs user interfaces and experiences.",
 "subjects":["design","psychology"],
-"skills":["design","creativity","user_research"],
-"work_style":["creative","technical"],
+"skills":["creativity","design"],
+"work_style":["creative"],
+"tags":["design","creative","technology"],
 "risk_level":"low",
 "salary_level":"medium",
 "education_years":3,
-"future_demand":"high",
-"roadmap":[
-"Learn design fundamentals",
-"Study UI UX tools",
-"Build design portfolio",
-"Work as designer"
-],
-"similar_careers":["graphic_designer","product_designer"]
+"future_demand":"high"
 },
 
 {
 "id":"graphic_designer",
 "name":"Graphic Designer",
 "category":"creative",
-"description":"Creates visual content for branding marketing and media.",
+"description":"Creates visual content and branding.",
 "subjects":["design","art"],
 "skills":["creativity","visual_design"],
 "work_style":["creative"],
+"tags":["design","creative","art"],
 "risk_level":"medium",
 "salary_level":"medium",
 "education_years":3,
-"future_demand":"medium",
-"roadmap":[
-"Study design principles",
-"Learn Adobe design tools",
-"Build portfolio",
-"Work as designer"
-],
-"similar_careers":["ui_ux_designer","game_artist"]
+"future_demand":"medium"
+},
+
+{
+"id":"animator",
+"name":"Animator",
+"category":"creative",
+"description":"Creates animated films and graphics.",
+"subjects":["art","design"],
+"skills":["animation","creativity"],
+"work_style":["creative"],
+"tags":["animation","creative","design"],
+"risk_level":"medium",
+"salary_level":"medium",
+"education_years":3,
+"future_demand":"medium"
+},
+
+{
+"id":"film_director",
+"name":"Film Director",
+"category":"creative",
+"description":"Directs movies and film productions.",
+"subjects":["arts","media"],
+"skills":["creativity","leadership"],
+"work_style":["creative"],
+"tags":["film","media","creative"],
+"risk_level":"high",
+"salary_level":"variable",
+"education_years":3,
+"future_demand":"medium"
+},
+
+{
+"id":"content_creator",
+"name":"Content Creator",
+"category":"creative",
+"description":"Creates digital media content online.",
+"subjects":["media","communication"],
+"skills":["creativity","communication"],
+"work_style":["creative"],
+"tags":["media","content","creative"],
+"risk_level":"high",
+"salary_level":"variable",
+"education_years":0,
+"future_demand":"high"
 },
 
 {
 "id":"civil_servant",
 "name":"Civil Servant",
 "category":"government",
-"description":"Works in government administration and policy implementation.",
-"subjects":["politics","history","economics"],
-"skills":["analysis","decision_making","leadership"],
-"work_style":["administrative","analytical"],
+"description":"Works in government administration and policy.",
+"subjects":["politics","history"],
+"skills":["analysis","leadership"],
+"work_style":["administrative"],
+"tags":["government","policy","administration"],
 "risk_level":"low",
 "salary_level":"high",
 "education_years":3,
-"future_demand":"stable",
-"roadmap":[
-"Complete graduation",
-"Prepare for civil service exam",
-"Clear UPSC or equivalent",
-"Join government services"
-],
-"similar_careers":["policy_analyst","lawyer"]
+"future_demand":"stable"
+},
+
+{
+"id":"teacher",
+"name":"Teacher",
+"category":"education",
+"description":"Educates students in schools or institutions.",
+"subjects":["education"],
+"skills":["communication","teaching"],
+"work_style":["people"],
+"tags":["education","teaching","people"],
+"risk_level":"low",
+"salary_level":"medium",
+"education_years":4,
+"future_demand":"high"
 }
 
 ]
