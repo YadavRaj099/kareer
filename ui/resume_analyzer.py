@@ -1,5 +1,4 @@
 import streamlit as st
-import time
 import plotly.express as px
 import pandas as pd
 
@@ -17,7 +16,6 @@ def show_resume_analyzer():
         st.error("Backend module failed to load.")
         st.code(str(e))
         return
-
 
     # ==================================================
     # HERO
@@ -37,8 +35,8 @@ def show_resume_analyzer():
     st.markdown("<div style='height:25px'></div>", unsafe_allow_html=True)
 
     st.caption(
-"Analysis is based on skill matching and may not fully reflect recruiter evaluation."
-)
+        "Analysis is based on skill matching and may not fully reflect recruiter evaluation."
+    )
 
     # ==================================================
     # UPLOAD PANEL
@@ -58,13 +56,16 @@ def show_resume_analyzer():
     </div>
     """, unsafe_allow_html=True)
 
-    uploaded_file = st.file_uploader(" ", type=["pdf", "docx"])
+    uploaded_file = st.file_uploader(
+        " ",
+        type=["pdf", "docx"],
+        help="Maximum file size: 5MB"
+    )
 
     st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 
-
     # ==================================================
-    # ROLE SELECTION (SEARCHABLE DROPDOWN)
+    # ROLE SELECTION
     # ==================================================
 
     roles = sorted(list_available_roles())
@@ -72,6 +73,8 @@ def show_resume_analyzer():
     if not roles:
         st.warning("No roles available in the career database.")
         return
+
+    st.caption(f"{len(roles)} careers supported")
 
     st.markdown("### 🎯 Target Career")
 
@@ -84,7 +87,6 @@ def show_resume_analyzer():
     )
 
     analyze = st.button("Analyze Resume", use_container_width=True)
-
 
     # ==================================================
     # START ANALYSIS
@@ -100,49 +102,28 @@ def show_resume_analyzer():
             st.warning("Please select a target career role.")
             return
 
-
-        # ==================================================
-        # LOADING SIMULATION
-        # ==================================================
-
-        progress_bar = st.progress(0)
-        status = st.empty()
-
-        steps = [
-            "Reading resume...",
-            "Extracting skills...",
-            "Analyzing role alignment...",
-            "Calculating readiness score...",
-            "Estimating interview probability...",
-            "Generating insights..."
-        ]
-
-        for i, step in enumerate(steps):
-            status.info(step)
-            progress_bar.progress((i + 1) / len(steps))
-            time.sleep(0.35)
-
-        status.empty()
-        progress_bar.empty()
-
+        # File size safety check
+        if uploaded_file.size > 5 * 1024 * 1024:
+            st.error("File too large. Please upload a file under 5MB.")
+            return
 
         # ==================================================
         # RUN ANALYSIS
         # ==================================================
 
-        try:
-            analysis = analyze_resume(uploaded_file, target_role)
-            summary = generate_summary(analysis)
-        except Exception as e:
-            st.error("Error analyzing resume.")
-            st.code(str(e))
-            return
+        with st.spinner("Analyzing resume..."):
 
+            try:
+                analysis = analyze_resume(uploaded_file, target_role)
+                summary = generate_summary(analysis)
+            except Exception as e:
+                st.error("Error analyzing resume.")
+                st.code(str(e))
+                return
 
         st.success("Analysis completed")
 
         st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
-
 
         # ==================================================
         # SCORE PANEL
@@ -167,9 +148,8 @@ def show_resume_analyzer():
 
         st.markdown("---")
 
-
         # ==================================================
-        # SKILL INTELLIGENCE RADAR
+        # SKILL RADAR
         # ==================================================
 
         categories = summary.get("skill_categories", {})
@@ -201,7 +181,6 @@ def show_resume_analyzer():
 
             st.markdown("---")
 
-
         # ==================================================
         # RESUME METRICS
         # ==================================================
@@ -219,7 +198,6 @@ def show_resume_analyzer():
             m3.metric("Skill Density", f"{metrics.get('skill_density_percent',0)}%")
 
             st.markdown("---")
-
 
         # ==================================================
         # DETECTED SKILLS
@@ -257,7 +235,6 @@ def show_resume_analyzer():
 
         st.markdown("---")
 
-
         # ==================================================
         # SKILL GAPS
         # ==================================================
@@ -290,7 +267,6 @@ def show_resume_analyzer():
 
         st.markdown("---")
 
-
         # ==================================================
         # RECOMMENDED CAREERS
         # ==================================================
@@ -322,6 +298,18 @@ def show_resume_analyzer():
 
         else:
             st.info("No alternative roles detected.")
+
+        # ==================================================
+        # DOWNLOAD RESULTS
+        # ==================================================
+
+        st.markdown("---")
+
+        st.download_button(
+            "Download Analysis",
+            data=str(summary),
+            file_name="resume_analysis.txt"
+        )
 
         st.markdown("<div style='height:25px'></div>", unsafe_allow_html=True)
 
