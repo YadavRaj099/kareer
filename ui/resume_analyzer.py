@@ -61,7 +61,7 @@ def show_resume_analyzer():
 
 
     # ==================================================
-    # ROLE SELECTION WITH SEARCH BUTTON
+    # ROLE SELECTION (SEARCHABLE DROPDOWN)
     # ==================================================
 
     roles = sorted(list_available_roles())
@@ -72,42 +72,12 @@ def show_resume_analyzer():
 
     st.markdown("### 🎯 Target Career")
 
-    if "filtered_roles" not in st.session_state:
-        st.session_state.filtered_roles = roles
-
-    col1, col2 = st.columns([4,1])
-
-    with col1:
-        search_query = st.text_input(
-            "Search career role",
-            placeholder="Example: Data Scientist, Backend Developer..."
-        )
-
-    with col2:
-        search_btn = st.button("🔍 Search")
-
-    if search_btn:
-
-        if search_query.strip() == "":
-            st.session_state.filtered_roles = roles
-
-        else:
-
-            filtered = [
-                role for role in roles
-                if search_query.lower() in role.replace("_"," ").lower()
-            ]
-
-            if not filtered:
-                st.warning("No roles match your search.")
-                st.session_state.filtered_roles = roles
-            else:
-                st.session_state.filtered_roles = filtered
-
     target_role = st.selectbox(
-        "Select role",
-        st.session_state.filtered_roles,
-        format_func=lambda x: x.replace("_"," ").title()
+        "Search or select a career role",
+        roles,
+        format_func=lambda x: x.replace("_", " ").title(),
+        index=None,
+        placeholder="Start typing a role name..."
     )
 
     analyze = st.button("Analyze Resume", use_container_width=True)
@@ -121,6 +91,10 @@ def show_resume_analyzer():
 
         if not uploaded_file:
             st.warning("Please upload a resume first.")
+            return
+
+        if not target_role:
+            st.warning("Please select a target career role.")
             return
 
 
@@ -217,8 +191,7 @@ def show_resume_analyzer():
 
             fig.update_layout(
                 template="plotly_dark",
-                height=520,
-                margin=dict(l=30, r=30, t=30, b=30)
+                height=520
             )
 
             st.plotly_chart(fig, use_container_width=True)
