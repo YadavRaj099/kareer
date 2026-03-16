@@ -5,6 +5,10 @@ def show_results():
 
     st.title("Career Results")
 
+    # =========================
+    # SAFETY CHECK
+    # =========================
+
     if "results" not in st.session_state:
         st.warning("No results available. Please take the career test first.")
         return
@@ -24,12 +28,12 @@ def show_results():
     score = best.get("score", 0)
     classification = best.get("classification", "Match")
 
-    confidence = min(95, 60 + score * 5)
+    confidence = min(95, int(60 + score * 5))
 
     st.markdown("---")
 
     # =========================
-    # HERO MATCH SECTION
+    # HERO MATCH
     # =========================
 
     st.markdown(
@@ -87,7 +91,16 @@ def show_results():
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.button("🧭 View Career Roadmap")
+
+        if st.button("🧭 View Career Roadmap"):
+
+            top_match = matches[0]
+            career_data = top_match.get("data")
+
+            if career_data:
+                st.session_state.roadmap = career_data
+                st.session_state.page = "roadmap"
+                st.rerun()
 
     with col2:
         st.button("📤 Share Result")
@@ -113,6 +126,9 @@ def show_results():
 
             with cols[i]:
 
+                name = m.get("career", "Career")
+                classification = m.get("classification", "")
+
                 st.markdown(
                     f"""
                     <div style="
@@ -124,11 +140,11 @@ def show_results():
                     ">
 
                     <div style="font-weight:600;font-size:18px;">
-                    {m['career']}
+                    {name}
                     </div>
 
                     <div style="margin-top:6px;color:#94a3b8;">
-                    {m['classification']}
+                    {classification}
                     </div>
 
                     </div>
@@ -170,6 +186,12 @@ def show_results():
 
             with cols[i % 3]:
 
+                # SAFE name extraction
+                if isinstance(career, dict):
+                    name = career.get("name", "Career")
+                else:
+                    name = str(career).replace("_", " ").title()
+
                 st.markdown(
                     f"""
                     <div style="
@@ -177,8 +199,9 @@ def show_results():
                         border-radius:10px;
                         border:1px solid #334155;
                         background:#020617;
+                        text-align:center;
                     ">
-                    {career.get('name','Career')}
+                    {name}
                     </div>
                     """,
                     unsafe_allow_html=True
