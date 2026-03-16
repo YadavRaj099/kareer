@@ -238,39 +238,37 @@ def show_resume_analyzer():
 
 
         # ==================================================
-        # DETECTED SKILLS
-        # ==================================================
+# DETECTED SKILLS
+# ==================================================
 
-        st.subheader("🧠 Detected Skills")
+st.subheader("🧠 Detected Skills")
 
-        skills = analysis.get("skills", {}).get("skills", [])
+skills = analysis.get("skills", {}).get("skills", [])
 
-        if skills:
+if skills:
 
-            html = '<div style="display:flex;flex-wrap:wrap;gap:8px;">'
+    cols = st.columns(4)
 
-            for skill in skills:
-                html += f"""
-                <span style="
-                    padding:6px 14px;
-                    border-radius:999px;
-                    border:1px solid #334155;
-                    font-size:13px;
-                    background:#020617;
-                ">
-                {skill}
-                </span>
-                """
+    for i, skill in enumerate(skills):
+        cols[i % 4].markdown(
+            f"""
+            <div style="
+                padding:8px 12px;
+                border-radius:999px;
+                border:1px solid #334155;
+                font-size:13px;
+                background:#020617;
+                text-align:center;
+                margin-bottom:8px;
+            ">
+            {skill}
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
-            html += "</div>"
-
-            st.markdown(html, unsafe_allow_html=True)
-
-        else:
-            st.info("No skills detected in resume.")
-
-        st.markdown("---")
-
+else:
+    st.info("No skills detected in resume.")
 
         # ==================================================
         # SKILL GAPS
