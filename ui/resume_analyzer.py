@@ -18,6 +18,7 @@ def show_resume_analyzer():
         st.code(str(e))
         return
 
+
     # ==================================================
     # HERO
     # ==================================================
@@ -34,6 +35,7 @@ def show_resume_analyzer():
     """, unsafe_allow_html=True)
 
     st.markdown("<div style='height:25px'></div>", unsafe_allow_html=True)
+
 
     # ==================================================
     # UPLOAD PANEL
@@ -57,8 +59,9 @@ def show_resume_analyzer():
 
     st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 
+
     # ==================================================
-    # ROLE SELECTION WITH SEARCH
+    # ROLE SELECTION WITH SEARCH BUTTON
     # ==================================================
 
     roles = sorted(list_available_roles())
@@ -69,31 +72,46 @@ def show_resume_analyzer():
 
     st.markdown("### 🎯 Target Career")
 
-    search_query = st.text_input(
-        "Search career role",
-        placeholder="Try: Data Scientist, Backend Developer, UI Designer..."
-    )
+    if "filtered_roles" not in st.session_state:
+        st.session_state.filtered_roles = roles
 
-    # Live filtering
-    filtered_roles = roles
+    col1, col2 = st.columns([4,1])
 
-    if search_query:
-        filtered_roles = [
-            role for role in roles
-            if search_query.lower() in role.replace("_", " ").lower()
-        ]
+    with col1:
+        search_query = st.text_input(
+            "Search career role",
+            placeholder="Example: Data Scientist, Backend Developer..."
+        )
 
-    if not filtered_roles:
-        st.warning("No roles match your search.")
-        filtered_roles = roles
+    with col2:
+        search_btn = st.button("🔍 Search")
+
+    if search_btn:
+
+        if search_query.strip() == "":
+            st.session_state.filtered_roles = roles
+
+        else:
+
+            filtered = [
+                role for role in roles
+                if search_query.lower() in role.replace("_"," ").lower()
+            ]
+
+            if not filtered:
+                st.warning("No roles match your search.")
+                st.session_state.filtered_roles = roles
+            else:
+                st.session_state.filtered_roles = filtered
 
     target_role = st.selectbox(
         "Select role",
-        filtered_roles,
-        format_func=lambda x: x.replace("_", " ").title()
+        st.session_state.filtered_roles,
+        format_func=lambda x: x.replace("_"," ").title()
     )
 
     analyze = st.button("Analyze Resume", use_container_width=True)
+
 
     # ==================================================
     # START ANALYSIS
@@ -104,6 +122,7 @@ def show_resume_analyzer():
         if not uploaded_file:
             st.warning("Please upload a resume first.")
             return
+
 
         # ==================================================
         # LOADING SIMULATION
@@ -129,6 +148,7 @@ def show_resume_analyzer():
         status.empty()
         progress_bar.empty()
 
+
         # ==================================================
         # RUN ANALYSIS
         # ==================================================
@@ -141,9 +161,11 @@ def show_resume_analyzer():
             st.code(str(e))
             return
 
+
         st.success("Analysis completed")
 
         st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
+
 
         # ==================================================
         # SCORE PANEL
@@ -167,6 +189,7 @@ def show_resume_analyzer():
             st.success("Your resume is well aligned with this role.")
 
         st.markdown("---")
+
 
         # ==================================================
         # SKILL INTELLIGENCE RADAR
@@ -202,6 +225,7 @@ def show_resume_analyzer():
 
             st.markdown("---")
 
+
         # ==================================================
         # RESUME METRICS
         # ==================================================
@@ -219,6 +243,7 @@ def show_resume_analyzer():
             m3.metric("Skill Density", f"{metrics.get('skill_density_percent',0)}%")
 
             st.markdown("---")
+
 
         # ==================================================
         # DETECTED SKILLS
@@ -256,6 +281,7 @@ def show_resume_analyzer():
 
         st.markdown("---")
 
+
         # ==================================================
         # SKILL GAPS
         # ==================================================
@@ -287,6 +313,7 @@ def show_resume_analyzer():
             st.success("Your resume already covers required skills.")
 
         st.markdown("---")
+
 
         # ==================================================
         # RECOMMENDED CAREERS
