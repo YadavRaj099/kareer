@@ -282,4 +282,4 @@ def show_home(go):
         """, unsafe_allow_html=True)
 
         if st.button("Open Resume Analyzer", use_container_width=True):
-            go("resume_analyzer")
+            go("resume_analyzer") 
