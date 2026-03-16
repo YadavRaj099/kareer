@@ -1,6 +1,7 @@
 import streamlit as st
 import plotly.express as px
 import pandas as pd
+import json
 
 
 def show_resume_analyzer():
@@ -17,6 +18,7 @@ def show_resume_analyzer():
         st.code(str(e))
         return
 
+
     # ==================================================
     # HERO
     # ==================================================
@@ -32,11 +34,12 @@ def show_resume_analyzer():
     </p>
     """, unsafe_allow_html=True)
 
-    st.markdown("<div style='height:25px'></div>", unsafe_allow_html=True)
-
     st.caption(
         "Analysis is based on skill matching and may not fully reflect recruiter evaluation."
     )
+
+    st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
+
 
     # ==================================================
     # UPLOAD PANEL
@@ -45,34 +48,42 @@ def show_resume_analyzer():
     st.markdown("""
     <div style="
         border:1px solid #1e293b;
-        padding:28px;
+        padding:24px;
         border-radius:18px;
         background:linear-gradient(180deg,#0f172a,#020617);
     ">
     <h3 style="margin-bottom:6px;">Upload Resume</h3>
     <p style="color:#94a3b8;margin-top:0;">
-    Supported formats: PDF, DOCX
+    Supported formats: PDF, DOCX (Max 5MB)
     </p>
     </div>
     """, unsafe_allow_html=True)
 
     uploaded_file = st.file_uploader(
         " ",
-        type=["pdf", "docx"],
-        help="Maximum file size: 5MB"
+        type=["pdf", "docx"]
     )
 
     st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
+
 
     # ==================================================
     # ROLE SELECTION
     # ==================================================
 
-    roles = sorted(list_available_roles())
+    try:
+        roles = sorted(list_available_roles())
+    except Exception as e:
+        st.error("Failed to load roles database.")
+        st.code(str(e))
+        return
 
     if not roles:
         st.warning("No roles available in the career database.")
         return
+
+    # Debug line (remove later if desired)
+    # st.write("Loaded roles:", roles)
 
     st.caption(f"{len(roles)} careers supported")
 
@@ -80,13 +91,13 @@ def show_resume_analyzer():
 
     target_role = st.selectbox(
         "Search or select a career role",
-        roles,
+        options=roles,
         format_func=lambda x: x.replace("_", " ").title(),
-        index=None,
-        placeholder="Start typing a role name..."
+        index=0
     )
 
     analyze = st.button("Analyze Resume", use_container_width=True)
+
 
     # ==================================================
     # START ANALYSIS
@@ -98,18 +109,9 @@ def show_resume_analyzer():
             st.warning("Please upload a resume first.")
             return
 
-        if not target_role:
-            st.warning("Please select a target career role.")
-            return
-
-        # File size safety check
         if uploaded_file.size > 5 * 1024 * 1024:
             st.error("File too large. Please upload a file under 5MB.")
             return
-
-        # ==================================================
-        # RUN ANALYSIS
-        # ==================================================
 
         with st.spinner("Analyzing resume..."):
 
@@ -123,7 +125,8 @@ def show_resume_analyzer():
 
         st.success("Analysis completed")
 
-        st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
+        st.markdown("---")
+
 
         # ==================================================
         # SCORE PANEL
@@ -147,6 +150,7 @@ def show_resume_analyzer():
             st.success("Your resume is well aligned with this role.")
 
         st.markdown("---")
+
 
         # ==================================================
         # SKILL RADAR
@@ -174,12 +178,13 @@ def show_resume_analyzer():
 
             fig.update_layout(
                 template="plotly_dark",
-                height=520
+                height=500
             )
 
             st.plotly_chart(fig, use_container_width=True)
 
             st.markdown("---")
+
 
         # ==================================================
         # RESUME METRICS
@@ -198,6 +203,7 @@ def show_resume_analyzer():
             m3.metric("Skill Density", f"{metrics.get('skill_density_percent',0)}%")
 
             st.markdown("---")
+
 
         # ==================================================
         # DETECTED SKILLS
@@ -235,6 +241,7 @@ def show_resume_analyzer():
 
         st.markdown("---")
 
+
         # ==================================================
         # SKILL GAPS
         # ==================================================
@@ -247,25 +254,13 @@ def show_resume_analyzer():
 
             for gap in gaps:
 
-                st.markdown(
-                    f"""
-                    <div style="
-                        background:#1f2937;
-                        border-left:4px solid #f59e0b;
-                        padding:10px;
-                        border-radius:6px;
-                        margin-bottom:8px;
-                    ">
-                    {gap}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                st.warning(gap)
 
         else:
             st.success("Your resume already covers required skills.")
 
         st.markdown("---")
+
 
         # ==================================================
         # RECOMMENDED CAREERS
@@ -278,26 +273,11 @@ def show_resume_analyzer():
         if rec:
 
             for role in rec:
-
-                role_name = role.replace("_", " ").title()
-
-                st.markdown(
-                    f"""
-                    <div style="
-                        background:#111827;
-                        padding:12px;
-                        border-radius:8px;
-                        margin-bottom:8px;
-                        border:1px solid #374151;
-                    ">
-                    🚀 {role_name}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                st.info(role.replace("_", " ").title())
 
         else:
             st.info("No alternative roles detected.")
+
 
         # ==================================================
         # DOWNLOAD RESULTS
@@ -307,8 +287,9 @@ def show_resume_analyzer():
 
         st.download_button(
             "Download Analysis",
-            data=str(summary),
-            file_name="resume_analysis.txt"
+            data=json.dumps(summary, indent=2),
+            file_name="resume_analysis.json",
+            mime="application/json"
         )
 
         st.markdown("<div style='height:25px'></div>", unsafe_allow_html=True)
